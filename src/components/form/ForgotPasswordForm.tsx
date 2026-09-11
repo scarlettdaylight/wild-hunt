@@ -23,7 +23,7 @@ export function ForgotPasswordForm() {
       >
         <Link
           href="/auth/login"
-          className="mt-6 inline-block text-sm underline underline-offset-4"
+          className="mt-6 inline-block text-sm text-link underline underline-offset-4 hover:text-link-hover"
         >
           Back to sign in
         </Link>
@@ -44,9 +44,12 @@ export function ForgotPasswordForm() {
         </SubmitButton>
       </form>
 
-      <p className="mt-6 text-sm text-black/60 dark:text-white/60">
+      <p className="mt-6 text-sm text-muted">
         Remembered it?{" "}
-        <Link href="/auth/login" className="underline underline-offset-4">
+        <Link
+          href="/auth/login"
+          className="text-link underline underline-offset-4 hover:text-link-hover"
+        >
           Sign in
         </Link>
       </p>

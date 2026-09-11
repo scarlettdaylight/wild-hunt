@@ -1,25 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Core */
+  --color-navy: #0d3f73;
+  --color-orange: #ee6a33;
+  --color-cream: #f4efe6;
+  --color-off-white: #fbf8f2;
+  --color-ink: #12243a;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
+  /* App aliases */
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-ink);
+  --color-primary: var(--color-navy);
+  --color-accent: var(--color-orange);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Text */
+  --color-muted: #40536b; /* secondary text */
+  --color-subtle: #6d7c8e; /* tertiary text / subheads */
+  --color-label: #8b98a8; /* mono labels, muted */
+  --color-faint: #93a0af; /* faintest text */
+
+  /* Lines & fills */
+  --color-hairline: #e3d9c6; /* default borders */
+  --color-hairline-card: #e0d5c0; /* card borders */
+  --color-hairline-dashed: #d9ccb4; /* dashed borders */
+  --color-fill: #efe7d8;
+
+  /* Accents */
+  --color-link: #0d5fa6;
+  --color-link-hover: #e8622c;
+  --color-orange-text: #c2481a; /* orange text on light */
+  --color-exp-start: #f6a03c; /* EXP bar gradient */
+  --color-exp-end: #ee6a33;
+  --color-salary: #1b7a52;
+  --color-selected-fill: #fdf1ea;
+
+  /* Status */
+  --color-status-pending: #f0a93c;
+  --color-status-interview: #2e9e7a;
+  --color-status-rejected: #98a5b3;
+  --color-status-offer: #8a5bc4;
+
+  /* Card types */
+  --color-card-fire: #e8622c;
+  --color-card-water: #2e7fc7;
+  --color-card-psychic: #8a5bc4;
+  --color-card-face: #fdf8ec;
+  --color-card-art-border: #e9c97a;
+  --color-card-mono-label: #7a5a22;
+
+  /* Third-party brand (kept accurate, not themed) */
+  --color-linkedin: #0a66c2;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-background);
+  color: var(--color-foreground);
   font-family:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
