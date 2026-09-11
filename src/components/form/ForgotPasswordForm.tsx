@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useActionState } from "react";
 
-import { requestPasswordReset } from "@/app/auth/actions";
+import { requestPasswordReset } from "@/lib/auth/actions";
+import { ROUTES } from "@/lib/routes";
 import { Field } from "./Field";
 import { FormError } from "./FormError";
 import { FormShell } from "./FormShell";
@@ -22,7 +23,7 @@ export function ForgotPasswordForm() {
         description="If that address has an account, a password reset link is on its way."
       >
         <Link
-          href="/auth/login"
+          href={ROUTES.login}
           className="mt-6 inline-block text-sm text-link underline underline-offset-4 hover:text-link-hover"
         >
           Back to sign in
@@ -47,7 +48,7 @@ export function ForgotPasswordForm() {
       <p className="mt-6 text-sm text-muted">
         Remembered it?{" "}
         <Link
-          href="/auth/login"
+          href={ROUTES.login}
           className="text-link underline underline-offset-4 hover:text-link-hover"
         >
           Sign in

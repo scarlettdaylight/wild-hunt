@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 
 import { AuthForm } from "@/components/form/AuthForm";
-import { signIn } from "@/app/auth/actions";
+import { signIn } from "@/lib/auth/actions";
+import { ROUTES } from "@/lib/routes";
 
 export const metadata = { title: "Sign in · Wild Hunt" };
 
@@ -16,7 +17,7 @@ export default function LoginPage() {
         showForgotPassword
         footer={{
           prompt: "No account yet?",
-          href: "/auth/sign-up",
+          href: ROUTES.signUp,
           linkLabel: "Create one",
         }}
       />

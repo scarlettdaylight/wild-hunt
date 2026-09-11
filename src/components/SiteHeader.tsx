@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/server";
-import { signOut } from "@/app/auth/actions";
+import { signOut } from "@/lib/auth/actions";
+import { ROUTES } from "@/lib/routes";
 
 export async function SiteHeader() {
   const supabase = await createClient();
@@ -18,8 +19,8 @@ export async function SiteHeader() {
 
         {user ? (
           <div className="flex items-center gap-4 text-sm">
-            <Link href="/protected" className="underline-offset-4 hover:underline">
-              Protected
+            <Link href={ROUTES.dashboard} className="underline-offset-4 hover:underline">
+              Dashboard
             </Link>
             <form action={signOut}>
               <button
@@ -31,7 +32,7 @@ export async function SiteHeader() {
             </form>
           </div>
         ) : (
-          <Link href="/auth/login" className="text-sm underline-offset-4 hover:underline">
+          <Link href={ROUTES.login} className="text-sm underline-offset-4 hover:underline">
             Sign in
           </Link>
         )}

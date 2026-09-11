@@ -1,11 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
+import { PUBLIC_ROUTES, ROUTES } from "@/lib/routes";
 import { supabasePublishableKey, supabaseUrl } from "./env";
 
-/** Routes reachable without a session. Everything else redirects to /auth/login. */
-const PUBLIC_ROUTES = ["/", "/auth"];
-
+/**
+ * Route groups are invisible to the runtime, so the `(public)` / `(protected)`
+ * split in `src/app` cannot be read off the request. `PUBLIC_ROUTES` mirrors it.
+ */
 function isPublic(pathname: string) {
   return PUBLIC_ROUTES.some(
     (route) => pathname === route || pathname.startsWith(`${route}/`),
@@ -44,7 +46,7 @@ export async function updateSession(request: NextRequest) {
 
   if (!data?.claims && !isPublic(request.nextUrl.pathname)) {
     const url = request.nextUrl.clone();
-    url.pathname = "/auth/login";
+    url.pathname = ROUTES.login;
     url.searchParams.set("redirect", request.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
