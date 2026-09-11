@@ -47,7 +47,7 @@ export function AuthForm({
         {showForgotPassword && (
           <Link
             href="/auth/forgot-password"
-            className="-mt-1 self-start text-sm text-black/60 underline underline-offset-4 dark:text-white/60"
+            className="-mt-1 self-start text-sm text-link underline underline-offset-4 hover:text-link-hover"
           >
             Forgot password?
           </Link>
@@ -57,9 +57,12 @@ export function AuthForm({
         <SubmitButton pending={pending}>{submitLabel}</SubmitButton>
       </form>
 
-      <p className="mt-6 text-sm text-black/60 dark:text-white/60">
+      <p className="mt-6 text-sm text-muted">
         {footer.prompt}{" "}
-        <Link href={footer.href} className="underline underline-offset-4">
+        <Link
+          href={footer.href}
+          className="text-link underline underline-offset-4 hover:text-link-hover"
+        >
           {footer.linkLabel}
         </Link>
       </p>

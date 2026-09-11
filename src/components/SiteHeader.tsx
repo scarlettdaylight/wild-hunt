@@ -10,7 +10,7 @@ export async function SiteHeader() {
   } = await supabase.auth.getUser();
 
   return (
-    <header className="border-b border-black/10 dark:border-white/15">
+    <header className="border-b border-hairline bg-off-white">
       <nav className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-6 py-4">
         <Link href="/" className="font-semibold tracking-tight">
           Wild Hunt
@@ -24,7 +24,7 @@ export async function SiteHeader() {
             <form action={signOut}>
               <button
                 type="submit"
-                className="text-black/60 underline-offset-4 hover:underline dark:text-white/60"
+                className="text-muted underline-offset-4 hover:underline"
               >
                 Sign out
               </button>

@@ -1,5 +1,5 @@
 const inputClass =
-  "rounded-md border border-black/15 px-3 py-2 text-base outline-none focus:border-black/40 dark:border-white/20 dark:focus:border-white/50";
+  "rounded-md border border-hairline px-3 py-2 text-base outline-none focus:border-primary";
 
 export function Field({
   label,
