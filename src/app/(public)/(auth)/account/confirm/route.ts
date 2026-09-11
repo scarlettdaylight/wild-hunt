@@ -4,6 +4,7 @@ import { type EmailOtpType } from "@supabase/supabase-js";
 
 import { createClient } from "@/lib/supabase/server";
 import { safePath } from "@/lib/safe-path";
+import { ROUTES } from "@/lib/routes";
 
 /**
  * Landing point for every emailed auth link — signup confirmation and password
@@ -14,18 +15,18 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;
-  const next = searchParams.get("next") ?? "/protected";
+  const next = searchParams.get("next") ?? ROUTES.dashboard;
 
   if (!tokenHash || !type) {
-    redirect("/auth/error?error=Missing+token+hash+or+type");
+    redirect(`${ROUTES.authError}?error=Missing+token+hash+or+type`);
   }
 
   const supabase = await createClient();
   const { error } = await supabase.auth.verifyOtp({ type, token_hash: tokenHash });
 
   if (error) {
-    redirect(`/auth/error?error=${encodeURIComponent(error.message)}`);
+    redirect(`${ROUTES.authError}?error=${encodeURIComponent(error.message)}`);
   }
 
-  redirect(safePath(next, "/protected"));
+  redirect(safePath(next, ROUTES.dashboard));
 }

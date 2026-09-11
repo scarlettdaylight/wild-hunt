@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import type { AuthState } from "@/app/auth/actions";
+import type { AuthState } from "@/lib/auth/actions";
+import { ROUTES } from "@/lib/routes";
 import { Field } from "./Field";
 import { FormError } from "./FormError";
 import { FormShell } from "./FormShell";
@@ -46,7 +47,7 @@ export function AuthForm({
 
         {showForgotPassword && (
           <Link
-            href="/auth/forgot-password"
+            href={ROUTES.forgotPassword}
             className="-mt-1 self-start text-sm text-link underline underline-offset-4 hover:text-link-hover"
           >
             Forgot password?

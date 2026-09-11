@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 
-import { updatePassword } from "@/app/auth/actions";
+import { updatePassword } from "@/lib/auth/actions";
 import { Field } from "./Field";
 import { FormError } from "./FormError";
 import { FormShell } from "./FormShell";

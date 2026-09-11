@@ -20,12 +20,12 @@ schema, and the only place authorization lives is the RLS policies on the table.
 
 - Email/password auth — sign up, sign in, sign out.
 - Password reset: request a link, then set a new password.
-- `/auth/confirm` handles every emailed auth link (signup + recovery) by
+- `/account/confirm` handles every emailed auth link (signup + recovery) by
   exchanging the one-time token for a session.
 - Cookie-based sessions refreshed on every request in `src/proxy.ts`.
-- Route gating: anything outside `/` and `/auth/*` requires a session.
+- Route gating: anything outside `PUBLIC_ROUTES` requires a session.
 - A typed `pg_graphql` client (`src/lib/graphql.ts`) for reads.
-- A `/protected` placeholder page to build on.
+- A `/dashboard` placeholder page to build on.
 
 No application tables yet — add migrations under `supabase/migrations/`.
 
@@ -42,7 +42,7 @@ No application tables yet — add migrations under `supabase/migrations/`.
    Both values are public — the publishable key grants only what RLS allows.
    Never put the secret (service-role) key in a `NEXT_PUBLIC_` variable.
 
-   In the Supabase dashboard, add `<your-origin>/auth/confirm` to
+   In the Supabase dashboard, add `<your-origin>/account/confirm` to
    **Authentication → URL Configuration → Redirect URLs**, or the emailed links
    will be rejected.
 
@@ -65,13 +65,24 @@ No application tables yet — add migrations under `supabase/migrations/`.
 
 ## Layout
 
+Route groups split the app by access, not by URL. Folders wrapped in
+parentheses are organisational only — they never appear in the path, so
+`(auth)/login/page.tsx` serves `/login`.
+
 ```
 src/
   app/
-    auth/           Sign in/up/out, password reset, confirm route
-    protected/      Session-gated placeholder
+    layout.tsx      Root shell, shared by both groups
+    (public)/       No session required
+      page.tsx        /
+      (auth)/       Sign in/up, password reset
+        account/confirm/  /account/confirm — emailed-link landing
+    (protected)/    Session-gated
+      dashboard/      /dashboard
   components/
   lib/
+    auth/actions.ts Server actions for sign in/up/out and password reset
+    routes.ts       Every URL in one map, plus the public-route list
     graphql.ts      pg_graphql client
     safe-path.ts    Same-origin guard for redirect targets
     supabase/       Browser, server and proxy clients
@@ -92,13 +103,13 @@ Two things do need doing by hand:
 
 2. In Supabase, under **Authentication → URL Configuration**:
    - set **Site URL** to your production domain;
-   - add `https://your-domain/auth/confirm` to **Redirect URLs**.
+   - add `https://your-domain/account/confirm` to **Redirect URLs**.
 
    To let preview deployments log in too, also add a wildcard such as
    `https://your-project-*.vercel.app/**`.
 
 Emailed links point at the production domain rather than the per-deployment
-hostname — see `origin()` in `src/app/auth/actions.ts`. Override it with
+hostname — see `origin()` in `src/lib/auth/actions.ts`. Override it with
 `NEXT_PUBLIC_SITE_URL` if you serve from a custom domain.
 
 ## Adding data
@@ -116,7 +127,12 @@ Reads go through GraphQL; writes are usually terser through `supabase-js`
 
 Next 16 renamed the `middleware` file convention to `proxy` — the session
 refresh lives in `src/proxy.ts`, and `src/lib/supabase/proxy.ts` holds the
-logic. Public routes are listed in `PUBLIC_ROUTES` there.
+logic.
+
+Route groups are invisible at runtime, so the proxy cannot tell a `(public)`
+page from a `(protected)` one by its path. `PUBLIC_ROUTES` in
+`src/lib/routes.ts` mirrors the split by hand — add a page to the `(public)`
+group and you must list it there too, or it will redirect to sign-in.
 
 Redirect targets from query strings (`?redirect=`, `?next=`) go through
 `safePath`, which resolves them against a throwaway origin instead of

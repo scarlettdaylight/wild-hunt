@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 
 import { createClient } from "@/lib/supabase/server";
 import { safePath } from "@/lib/safe-path";
+import { ROUTES } from "@/lib/routes";
 
 export type AuthState = { error?: string; sent?: boolean } | undefined;
 
@@ -54,7 +55,7 @@ export async function signIn(
 
   // The layout reads the session, so the cached shell has to go too.
   revalidatePath("/", "layout");
-  redirect(safePath(formData.get("redirect"), "/protected"));
+  redirect(safePath(formData.get("redirect"), ROUTES.dashboard));
 }
 
 export async function signUp(
@@ -65,22 +66,22 @@ export async function signUp(
   const { error } = await supabase.auth.signUp({
     ...credentials(formData),
     options: {
-      // Where the confirmation link lands. /auth/confirm exchanges the token
-      // for a session, then forwards to `next`.
-      emailRedirectTo: `${await origin()}/auth/confirm?next=/protected`,
+      // Where the confirmation link lands: the confirm route exchanges the
+      // token for a session, then forwards to `next`.
+      emailRedirectTo: `${await origin()}${ROUTES.confirm}?next=${ROUTES.dashboard}`,
     },
   });
 
   if (error) return { error: error.message };
 
-  redirect("/auth/check-email");
+  redirect(ROUTES.checkEmail);
 }
 
 export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut();
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect(ROUTES.home);
 }
 
 export async function requestPasswordReset(
@@ -91,7 +92,7 @@ export async function requestPasswordReset(
   const { error } = await supabase.auth.resetPasswordForEmail(
     String(formData.get("email") ?? ""),
     {
-      redirectTo: `${await origin()}/auth/confirm?next=/auth/update-password`,
+      redirectTo: `${await origin()}${ROUTES.confirm}?next=${ROUTES.updatePassword}`,
     },
   );
 
@@ -116,5 +117,5 @@ export async function updatePassword(
   if (error) return { error: error.message };
 
   revalidatePath("/", "layout");
-  redirect("/protected");
+  redirect(ROUTES.dashboard);
 }
