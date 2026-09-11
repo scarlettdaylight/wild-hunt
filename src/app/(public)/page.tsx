@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/server";
+import { ROUTES } from "@/lib/routes";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -17,7 +18,7 @@ export default async function Home() {
       </p>
 
       <Link
-        href={user ? "/protected" : "/auth/sign-up"}
+        href={user ? ROUTES.dashboard : ROUTES.signUp}
         className="mt-8 inline-block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-off-white transition-opacity hover:opacity-90"
       >
         {user ? "Go to app" : "Get started"}
