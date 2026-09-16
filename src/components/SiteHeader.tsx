@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/lib/auth/actions";
 import { ROUTES } from "@/lib/routes";
 
-export async function SiteHeader() {
+export async function SiteHeader({ leading }: { leading?: React.ReactNode }) {
   const supabase = await createClient();
   const {
     data: { user },
@@ -13,15 +13,17 @@ export async function SiteHeader() {
   return (
     <header className="border-b border-hairline bg-off-white">
       <nav className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-6 py-4">
-        <Link href="/" className="font-semibold tracking-tight">
-          Wild Hunt
-        </Link>
+        <div className="flex items-center gap-3">
+          {/* The (protected) layout passes the drawer trigger in here. */}
+          {leading}
+          <Link href={ROUTES.home} className="font-semibold tracking-tight">
+            Wild Hunt
+          </Link>
+        </div>
 
         {user ? (
           <div className="flex items-center gap-4 text-sm">
-            <Link href={ROUTES.dashboard} className="underline-offset-4 hover:underline">
-              Dashboard
-            </Link>
+            {/* Section links live in SectionNav, inside the (protected) group. */}
             <form action={signOut}>
               <button
                 type="submit"

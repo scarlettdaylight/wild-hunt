@@ -2,11 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 
 export const metadata = { title: "Dashboard · Wild Hunt" };
 
-/**
- * Placeholder for the signed-in area. Everything in the `(protected)` group sits
- * behind the proxy, which bounces anonymous visitors to the sign-in page, so
- * pages here can assume a session.
- */
+/** Overview of the hunt: counts, recent activity, whatever needs attention. */
 export default async function DashboardPage() {
   const supabase = await createClient();
   const {

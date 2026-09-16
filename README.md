@@ -25,7 +25,7 @@ schema, and the only place authorization lives is the RLS policies on the table.
 - Cookie-based sessions refreshed on every request in `src/proxy.ts`.
 - Route gating: anything outside `PUBLIC_ROUTES` requires a session.
 - A typed `pg_graphql` client (`src/lib/graphql.ts`) for reads.
-- A `/dashboard` placeholder page to build on.
+- Four placeholder sections to build on: dashboard, jobs, documents, settings.
 
 No application tables yet — add migrations under `supabase/migrations/`.
 
@@ -72,17 +72,24 @@ parentheses are organisational only — they never appear in the path, so
 ```
 src/
   app/
-    layout.tsx      Root shell, shared by both groups
+    layout.tsx      Document shell only — html/body, no chrome
     (public)/       No session required
+      layout.tsx      SiteHeader across the top
       page.tsx        /
       (auth)/       Sign in/up, password reset
         account/confirm/  /account/confirm — emailed-link landing
     (protected)/    Session-gated
+      layout.tsx      Full-height sidebar beside the header
+                      (an overlay drawer below `md`)
       dashboard/      /dashboard
+      jobs/           /jobs
+      documents/      /documents
+      settings/       /settings
   components/
   lib/
     auth/actions.ts Server actions for sign in/up/out and password reset
     routes.ts       Every URL in one map, plus the public-route list
+    sidebar.ts      Cookie name shared by the layout and the Sidebar
     graphql.ts      pg_graphql client
     safe-path.ts    Same-origin guard for redirect targets
     supabase/       Browser, server and proxy clients
