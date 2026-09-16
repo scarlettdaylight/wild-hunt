@@ -18,6 +18,9 @@ export const ROUTES = {
   /** Landing point for emailed auth links; exchanges the token for a session. */
   confirm: "/account/confirm",
   dashboard: "/dashboard",
+  jobs: "/jobs",
+  documents: "/documents",
+  settings: "/settings",
 } as const;
 
 /**
