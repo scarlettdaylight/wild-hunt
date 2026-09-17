@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
-import { ROUTES } from "@/lib/routes";
+import { localizedPath, ROUTES } from "@/lib/routes";
 import { useSidebar } from "./SidebarProvider";
 import {
   ChevronLeftIcon,
@@ -20,10 +21,10 @@ import {
  * it on the edge runtime and has no business pulling in React components.
  */
 const SECTIONS = [
-  { href: ROUTES.dashboard, label: "Dashboard", Icon: DashboardIcon },
-  { href: ROUTES.jobs, label: "Jobs", Icon: JobsIcon },
-  { href: ROUTES.documents, label: "Documents", Icon: DocumentsIcon },
-  { href: ROUTES.settings, label: "Settings", Icon: SettingsIcon },
+  { href: ROUTES.dashboard, labelKey: "dashboard", Icon: DashboardIcon },
+  { href: ROUTES.jobs, labelKey: "jobs", Icon: JobsIcon },
+  { href: ROUTES.documents, labelKey: "documents", Icon: DocumentsIcon },
+  { href: ROUTES.settings, labelKey: "settings", Icon: SettingsIcon },
 ] as const;
 
 /**
@@ -35,6 +36,8 @@ const SECTIONS = [
  * out of the tab order; visibility is transitioned so the slide-out still shows.
  */
 export function Sidebar() {
+  const { t } = useTranslation();
+  const { locale } = useParams<{ locale: string }>();
   const { collapsed, toggleCollapsed, open, setOpen } = useSidebar();
   const pathname = usePathname();
 
@@ -57,8 +60,8 @@ export function Sidebar() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            aria-label="Close navigation"
-            className="flex h-8 w-8 shrink-0 items-center justify-center self-end rounded-md text-black/60 transition-colors hover:bg-black/5 hover:text-foreground md:hidden dark:text-white/60 dark:hover:bg-white/10"
+            aria-label={t("nav.closeNavigation")}
+            className="flex h-8 w-8 shrink-0 items-center justify-center self-end rounded-md text-off-white/70 transition-colors hover:bg-white/10 hover:text-off-white md:hidden"
           >
             <CloseIcon className="h-4 w-4" />
           </button>
@@ -67,9 +70,9 @@ export function Sidebar() {
             type="button"
             onClick={toggleCollapsed}
             aria-expanded={!collapsed}
-            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            className={`hidden h-8 w-8 shrink-0 items-center justify-center rounded-md text-black/60 transition-colors hover:bg-black/5 hover:text-foreground md:flex dark:text-white/60 dark:hover:bg-white/10 ${
+            aria-label={collapsed ? t("nav.expandSidebar") : t("nav.collapseSidebar")}
+            title={collapsed ? t("nav.expandSidebar") : t("nav.collapseSidebar")}
+            className={`hidden h-8 w-8 shrink-0 items-center justify-center rounded-md text-off-white/70 transition-colors hover:bg-white/10 hover:text-off-white md:flex ${
               collapsed ? "md:self-center" : "md:self-end"
             }`}
           >
@@ -82,21 +85,24 @@ export function Sidebar() {
 
           <nav>
             <ul className="flex flex-col gap-1">
-              {SECTIONS.map(({ href, label, Icon }) => {
-                const active = pathname === href || pathname.startsWith(`${href}/`);
+              {SECTIONS.map(({ href, labelKey, Icon }) => {
+                const localizedHref = localizedPath(locale, href);
+                const active =
+                  pathname === localizedHref || pathname.startsWith(`${localizedHref}/`);
+                const label = t(`nav.${labelKey}`);
 
                 return (
                   <li key={href}>
                     <Link
-                      href={href}
+                      href={localizedHref}
                       aria-current={active ? "page" : undefined}
                       title={collapsed ? label : undefined}
                       className={`flex h-10 items-center gap-3 rounded-md px-2 text-sm transition-colors ${
                         collapsed ? "md:justify-center md:px-0" : ""
                       } ${
                         active
-                          ? "bg-black/5 font-medium text-foreground dark:bg-white/10"
-                          : "text-black/60 hover:bg-black/5 hover:text-foreground dark:text-white/60 dark:hover:bg-white/10"
+                          ? "bg-white/10 font-medium text-off-white"
+                          : "text-off-white/70 hover:bg-white/10 hover:text-off-white"
                       }`}
                     >
                       <Icon className="h-5 w-5 shrink-0" />

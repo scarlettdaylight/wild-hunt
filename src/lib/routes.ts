@@ -40,3 +40,12 @@ export const PUBLIC_ROUTES = [
   ROUTES.authError,
   ROUTES.confirm,
 ] as const;
+
+/**
+ * Every route lives under `app/[locale]`, so a `ROUTES` value is never a real
+ * URL on its own — this is what turns one into the path a `Link` or `redirect`
+ * actually needs.
+ */
+export function localizedPath(locale: string, route: string) {
+  return route === "/" ? `/${locale}` : `/${locale}${route}`;
+}
