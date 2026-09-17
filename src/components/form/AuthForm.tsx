@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import type { AuthState } from "@/lib/auth/actions";
-import { ROUTES } from "@/lib/routes";
+import { localizedPath, ROUTES } from "@/lib/routes";
 import { Field } from "./Field";
 import { FormError } from "./FormError";
 import { FormShell } from "./FormShell";
@@ -27,17 +28,26 @@ export function AuthForm({
   showForgotPassword,
   footer,
 }: Props) {
+  const { t } = useTranslation();
+  const { locale } = useParams<{ locale: string }>();
   const [state, formAction, pending] = useActionState(action, undefined);
   const redirectTo = useSearchParams().get("redirect");
 
   return (
     <FormShell title={title}>
       <form action={formAction} className="mt-8 flex flex-col gap-4">
+        <input type="hidden" name="locale" value={locale} />
         {redirectTo && <input type="hidden" name="redirect" value={redirectTo} />}
 
-        <Field label="Email" type="email" name="email" autoComplete="email" required />
         <Field
-          label="Password"
+          label={t("auth.fields.email")}
+          type="email"
+          name="email"
+          autoComplete="email"
+          required
+        />
+        <Field
+          label={t("auth.fields.password")}
           type="password"
           name="password"
           autoComplete={showForgotPassword ? "current-password" : "new-password"}
@@ -47,21 +57,23 @@ export function AuthForm({
 
         {showForgotPassword && (
           <Link
-            href={ROUTES.forgotPassword}
+            href={localizedPath(locale, ROUTES.forgotPassword)}
             className="-mt-1 self-start text-sm text-link underline underline-offset-4 hover:text-link-hover"
           >
-            Forgot password?
+            {t("auth.signIn.forgotPassword")}
           </Link>
         )}
 
         <FormError message={state?.error} />
-        <SubmitButton pending={pending}>{submitLabel}</SubmitButton>
+        <SubmitButton pending={pending} pendingLabel={t("common.working")}>
+          {submitLabel}
+        </SubmitButton>
       </form>
 
       <p className="mt-6 text-sm text-muted">
         {footer.prompt}{" "}
         <Link
-          href={footer.href}
+          href={localizedPath(locale, footer.href)}
           className="text-link underline underline-offset-4 hover:text-link-hover"
         >
           {footer.linkLabel}

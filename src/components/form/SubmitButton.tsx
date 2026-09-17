@@ -1,11 +1,11 @@
 export function SubmitButton({
   pending,
   children,
-  pendingLabel = "Working…",
+  pendingLabel,
 }: {
   pending: boolean;
   children: React.ReactNode;
-  pendingLabel?: string;
+  pendingLabel: string;
 }) {
   return (
     <button

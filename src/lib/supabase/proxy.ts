@@ -5,6 +5,17 @@ import { PUBLIC_ROUTES, ROUTES } from "@/lib/routes";
 import { supabasePublishableKey, supabaseUrl } from "./env";
 
 /**
+ * Every route is nested under `app/[locale]`, so the first segment of any
+ * pathname reaching this point is always a locale — the proxy redirects
+ * anything else before this runs. Strips it so the rest of this file can
+ * compare against `ROUTES`, which stores locale-less paths.
+ */
+function splitLocale(pathname: string) {
+  const [, locale, ...rest] = pathname.split("/");
+  return { locale, pathname: `/${rest.join("/")}` };
+}
+
+/**
  * Route groups are invisible to the runtime, so the `(public)` / `(protected)`
  * split in `src/app` cannot be read off the request. `PUBLIC_ROUTES` mirrors it.
  */
@@ -44,10 +55,12 @@ export async function updateSession(request: NextRequest) {
   // refreshes an expired token, and a slow await here can log users out at random.
   const { data } = await supabase.auth.getClaims();
 
-  if (!data?.claims && !isPublic(request.nextUrl.pathname)) {
+  const { locale, pathname } = splitLocale(request.nextUrl.pathname);
+
+  if (!data?.claims && !isPublic(pathname)) {
     const url = request.nextUrl.clone();
-    url.pathname = ROUTES.login;
-    url.searchParams.set("redirect", request.nextUrl.pathname);
+    url.pathname = `/${locale}${ROUTES.login}`;
+    url.searchParams.set("redirect", pathname);
     return NextResponse.redirect(url);
   }
 

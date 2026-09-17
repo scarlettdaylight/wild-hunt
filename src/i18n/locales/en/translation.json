@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "title": "Wild Hunt",
+    "description": "Track the job hunt."
+  },
+  "common": {
+    "brand": "Wild Hunt",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "backToSignIn": "Back to sign in",
+    "working": "Working…"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "jobs": "Jobs",
+    "documents": "Documents",
+    "settings": "Settings",
+    "openNavigation": "Open navigation",
+    "closeNavigation": "Close navigation",
+    "expandSidebar": "Expand sidebar",
+    "collapseSidebar": "Collapse sidebar"
+  },
+  "home": {
+    "tagline": "Next.js and Supabase starter — auth, session handling and a GraphQL client, ready to build on.",
+    "getStarted": "Get started",
+    "goToApp": "Go to app"
+  },
+  "dashboard": {
+    "metaTitle": "Dashboard · Wild Hunt",
+    "heading": "Dashboard",
+    "signedInAs": "Signed in as {{email}}."
+  },
+  "jobs": {
+    "metaTitle": "Jobs · Wild Hunt",
+    "heading": "Jobs",
+    "empty": "Nothing tracked yet."
+  },
+  "documents": {
+    "metaTitle": "Documents · Wild Hunt",
+    "heading": "Documents",
+    "empty": "No documents uploaded yet."
+  },
+  "settings": {
+    "metaTitle": "Settings · Wild Hunt",
+    "heading": "Settings",
+    "empty": "Nothing to configure yet."
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New password"
+    },
+    "signIn": {
+      "metaTitle": "Sign in · Wild Hunt",
+      "title": "Sign in",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "No account yet?",
+      "createOne": "Create one"
+    },
+    "signUp": {
+      "metaTitle": "Create account · Wild Hunt",
+      "title": "Create account",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "checkEmail": {
+      "metaTitle": "Confirm your email · Wild Hunt",
+      "title": "Check your email",
+      "description": "We sent you a confirmation link. Click it to activate your account, then sign in."
+    },
+    "error": {
+      "metaTitle": "Something went wrong · Wild Hunt",
+      "title": "Something went wrong",
+      "unspecified": "An unspecified error occurred."
+    },
+    "forgotPassword": {
+      "metaTitle": "Reset password · Wild Hunt",
+      "title": "Reset password",
+      "description": "We'll email you a link to choose a new one.",
+      "submit": "Send reset link",
+      "sending": "Sending…",
+      "sentTitle": "Check your email",
+      "sentDescription": "If that address has an account, a password reset link is on its way.",
+      "remembered": "Remembered it?"
+    },
+    "updatePassword": {
+      "metaTitle": "New password · Wild Hunt",
+      "title": "Choose a new password",
+      "submit": "Save password",
+      "saving": "Saving…"
+    }
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "zh-TW": "繁體中文"
+  }
+}
