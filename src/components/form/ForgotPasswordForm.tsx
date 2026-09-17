@@ -2,15 +2,19 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
+import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import { requestPasswordReset } from "@/lib/auth/actions";
-import { ROUTES } from "@/lib/routes";
+import { localizedPath, ROUTES } from "@/lib/routes";
 import { Field } from "./Field";
 import { FormError } from "./FormError";
 import { FormShell } from "./FormShell";
 import { SubmitButton } from "./SubmitButton";
 
 export function ForgotPasswordForm() {
+  const { t } = useTranslation();
+  const { locale } = useParams<{ locale: string }>();
   const [state, formAction, pending] = useActionState(
     requestPasswordReset,
     undefined,
@@ -19,14 +23,14 @@ export function ForgotPasswordForm() {
   if (state?.sent) {
     return (
       <FormShell
-        title="Check your email"
-        description="If that address has an account, a password reset link is on its way."
+        title={t("auth.forgotPassword.sentTitle")}
+        description={t("auth.forgotPassword.sentDescription")}
       >
         <Link
-          href={ROUTES.login}
+          href={localizedPath(locale, ROUTES.login)}
           className="mt-6 inline-block text-sm text-link underline underline-offset-4 hover:text-link-hover"
         >
-          Back to sign in
+          {t("common.backToSignIn")}
         </Link>
       </FormShell>
     );
@@ -34,24 +38,31 @@ export function ForgotPasswordForm() {
 
   return (
     <FormShell
-      title="Reset password"
-      description="We'll email you a link to choose a new one."
+      title={t("auth.forgotPassword.title")}
+      description={t("auth.forgotPassword.description")}
     >
       <form action={formAction} className="mt-8 flex flex-col gap-4">
-        <Field label="Email" type="email" name="email" autoComplete="email" required />
+        <input type="hidden" name="locale" value={locale} />
+        <Field
+          label={t("auth.fields.email")}
+          type="email"
+          name="email"
+          autoComplete="email"
+          required
+        />
         <FormError message={state?.error} />
-        <SubmitButton pending={pending} pendingLabel="Sending…">
-          Send reset link
+        <SubmitButton pending={pending} pendingLabel={t("auth.forgotPassword.sending")}>
+          {t("auth.forgotPassword.submit")}
         </SubmitButton>
       </form>
 
       <p className="mt-6 text-sm text-muted">
-        Remembered it?{" "}
+        {t("auth.forgotPassword.remembered")}{" "}
         <Link
-          href={ROUTES.login}
+          href={localizedPath(locale, ROUTES.login)}
           className="text-link underline underline-offset-4 hover:text-link-hover"
         >
-          Sign in
+          {t("auth.signIn.title")}
         </Link>
       </p>
     </FormShell>
