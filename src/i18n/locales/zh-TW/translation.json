@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "title": "Wild Hunt",
+    "description": "追蹤求職進度。"
+  },
+  "common": {
+    "brand": "Wild Hunt",
+    "signIn": "登入",
+    "signOut": "登出",
+    "backToSignIn": "返回登入",
+    "working": "處理中…"
+  },
+  "nav": {
+    "dashboard": "儀表板",
+    "jobs": "職缺",
+    "documents": "文件",
+    "settings": "設定",
+    "openNavigation": "開啟導覽選單",
+    "closeNavigation": "關閉導覽選單",
+    "expandSidebar": "展開側邊欄",
+    "collapseSidebar": "收合側邊欄"
+  },
+  "home": {
+    "tagline": "Next.js 與 Supabase 入門專案 — 已內建驗證、工作階段處理與 GraphQL 客戶端，隨時可以開始開發。",
+    "getStarted": "開始使用",
+    "goToApp": "前往應用程式"
+  },
+  "dashboard": {
+    "metaTitle": "儀表板 · Wild Hunt",
+    "heading": "儀表板",
+    "signedInAs": "以 {{email}} 登入。"
+  },
+  "jobs": {
+    "metaTitle": "職缺 · Wild Hunt",
+    "heading": "職缺",
+    "empty": "尚未追蹤任何職缺。"
+  },
+  "documents": {
+    "metaTitle": "文件 · Wild Hunt",
+    "heading": "文件",
+    "empty": "尚未上傳任何文件。"
+  },
+  "settings": {
+    "metaTitle": "設定 · Wild Hunt",
+    "heading": "設定",
+    "empty": "目前沒有可設定的項目。"
+  },
+  "auth": {
+    "fields": {
+      "email": "電子郵件",
+      "password": "密碼",
+      "newPassword": "新密碼"
+    },
+    "signIn": {
+      "metaTitle": "登入 · Wild Hunt",
+      "title": "登入",
+      "submit": "登入",
+      "forgotPassword": "忘記密碼？",
+      "noAccount": "還沒有帳號？",
+      "createOne": "建立帳號"
+    },
+    "signUp": {
+      "metaTitle": "建立帳號 · Wild Hunt",
+      "title": "建立帳號",
+      "submit": "建立帳號",
+      "haveAccount": "已經有帳號了？",
+      "signIn": "登入"
+    },
+    "checkEmail": {
+      "metaTitle": "確認你的電子郵件 · Wild Hunt",
+      "title": "請確認你的電子郵件",
+      "description": "我們已寄送確認連結給你。請點選連結以啟用帳號，然後登入。"
+    },
+    "error": {
+      "metaTitle": "發生錯誤 · Wild Hunt",
+      "title": "發生錯誤",
+      "unspecified": "發生不明錯誤。"
+    },
+    "forgotPassword": {
+      "metaTitle": "重設密碼 · Wild Hunt",
+      "title": "重設密碼",
+      "description": "我們會寄送連結給你，讓你選擇新密碼。",
+      "submit": "傳送重設連結",
+      "sending": "傳送中…",
+      "sentTitle": "請確認你的電子郵件",
+      "sentDescription": "如果該地址已註冊帳號，密碼重設連結即將寄出。",
+      "remembered": "想起密碼了？"
+    },
+    "updatePassword": {
+      "metaTitle": "設定新密碼 · Wild Hunt",
+      "title": "選擇新密碼",
+      "submit": "儲存密碼",
+      "saving": "儲存中…"
+    }
+  },
+  "localeSwitcher": {
+    "label": "語言",
+    "en": "English",
+    "zh-TW": "繁體中文"
+  }
+}

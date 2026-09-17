@@ -4,9 +4,10 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
+import type { Locale } from "@/i18n/settings";
 import { createClient } from "@/lib/supabase/server";
 import { safePath } from "@/lib/safe-path";
-import { ROUTES } from "@/lib/routes";
+import { localizedPath, ROUTES } from "@/lib/routes";
 
 export type AuthState = { error?: string; sent?: boolean } | undefined;
 
@@ -15,6 +16,15 @@ function credentials(formData: FormData) {
     email: String(formData.get("email") ?? ""),
     password: String(formData.get("password") ?? ""),
   };
+}
+
+/**
+ * Every form that calls into this file carries its locale as a hidden field —
+ * Server Actions have no request-scoped access to the `[locale]` route segment
+ * the way a Server Component does, so the client has to hand it over explicitly.
+ */
+function formLocale(formData: FormData): Locale {
+  return String(formData.get("locale") ?? "en") as Locale;
 }
 
 /**
@@ -55,7 +65,12 @@ export async function signIn(
 
   // The layout reads the session, so the cached shell has to go too.
   revalidatePath("/", "layout");
-  redirect(safePath(formData.get("redirect"), ROUTES.dashboard));
+  redirect(
+    localizedPath(
+      formLocale(formData),
+      safePath(formData.get("redirect"), ROUTES.dashboard),
+    ),
+  );
 }
 
 export async function signUp(
@@ -63,25 +78,26 @@ export async function signUp(
   formData: FormData,
 ): Promise<AuthState> {
   const supabase = await createClient();
+  const locale = formLocale(formData);
   const { error } = await supabase.auth.signUp({
     ...credentials(formData),
     options: {
       // Where the confirmation link lands: the confirm route exchanges the
       // token for a session, then forwards to `next`.
-      emailRedirectTo: `${await origin()}${ROUTES.confirm}?next=${ROUTES.dashboard}`,
+      emailRedirectTo: `${await origin()}${localizedPath(locale, ROUTES.confirm)}?next=${ROUTES.dashboard}`,
     },
   });
 
   if (error) return { error: error.message };
 
-  redirect(ROUTES.checkEmail);
+  redirect(localizedPath(locale, ROUTES.checkEmail));
 }
 
-export async function signOut() {
+export async function signOut(locale: Locale) {
   const supabase = await createClient();
   await supabase.auth.signOut();
   revalidatePath("/", "layout");
-  redirect(ROUTES.home);
+  redirect(localizedPath(locale, ROUTES.home));
 }
 
 export async function requestPasswordReset(
@@ -89,10 +105,11 @@ export async function requestPasswordReset(
   formData: FormData,
 ): Promise<AuthState> {
   const supabase = await createClient();
+  const locale = formLocale(formData);
   const { error } = await supabase.auth.resetPasswordForEmail(
     String(formData.get("email") ?? ""),
     {
-      redirectTo: `${await origin()}${ROUTES.confirm}?next=${ROUTES.updatePassword}`,
+      redirectTo: `${await origin()}${localizedPath(locale, ROUTES.confirm)}?next=${ROUTES.updatePassword}`,
     },
   );
 
@@ -117,5 +134,5 @@ export async function updatePassword(
   if (error) return { error: error.message };
 
   revalidatePath("/", "layout");
-  redirect(ROUTES.dashboard);
+  redirect(localizedPath(formLocale(formData), ROUTES.dashboard));
 }
