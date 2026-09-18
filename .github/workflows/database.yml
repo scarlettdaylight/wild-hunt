@@ -1,0 +1,55 @@
+name: Database
+
+# Verifies the schema the way a fresh clone would see it: every migration
+# applied in order to an empty Postgres, then the pgTAP tests against it.
+#
+# This needs no Supabase plan and no API token. The CLI runs the database in
+# Docker on the runner, so nothing talks to the hosted project.
+
+on:
+  pull_request:
+    paths:
+      - "supabase/**"
+      - ".github/workflows/database.yml"
+  push:
+    branches: [develop, master]
+    paths:
+      - "supabase/**"
+      - ".github/workflows/database.yml"
+
+jobs:
+  test:
+    name: Migrations and pgTAP tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      # Keep this pinned to the `supabase` devDependency in package.json, so a
+      # migration that applies locally cannot fail here on a different CLI.
+      - uses: supabase/setup-cli@v3
+        with:
+          version: 2.117.0
+
+      # Only Postgres. The auth schema the tests insert into ships with the
+      # database image, so gotrue and the rest of the stack are not needed and
+      # starting them would roughly triple the job.
+      - name: Start Postgres and apply migrations
+        run: |
+          supabase start \
+            -x gotrue,realtime,storage-api,imgproxy,kong,mailpit,postgrest \
+            -x postgres-meta,studio,edge-runtime,logflare,vector,supavisor
+
+      # Fails if any migration is missing from the history table, which catches
+      # a file that was edited after being applied rather than added as a new one.
+      - name: Check no migration is pending
+        run: supabase migration list --local
+
+      - name: Run pgTAP tests
+        run: supabase test db
+
+      # `supabase logs` is not a CLI command; the container is the only source.
+      # Name comes from project_id in config.toml.
+      - name: Show database logs on failure
+        if: failure()
+        run: docker logs --tail 200 supabase_db_wild-hunt || true
