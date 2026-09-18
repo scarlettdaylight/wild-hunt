@@ -27,7 +27,8 @@ schema, and the only place authorization lives is the RLS policies on the table.
 - A typed `pg_graphql` client (`src/lib/graphql.ts`) for reads.
 - Four placeholder sections to build on: dashboard, jobs, documents, settings.
 
-No application tables yet — add migrations under `supabase/migrations/`.
+- Job tracking schema: applications, their companies, platforms, industries
+  and interview stages, with RLS policies and pgTAP tests.
 
 ## Setup
 
@@ -53,6 +54,26 @@ No application tables yet — add migrations under `supabase/migrations/`.
    yarn dev
    ```
 
+4. For schema work, run the database locally. This needs **Docker Desktop
+   installed and running** — the CLI talks to the Docker daemon and will not
+   install it for you (https://docs.docker.com/desktop/). There is no
+   `supabase init` step: `supabase/config.toml` is committed.
+
+   ```bash
+   yarn db:start   # first run pulls a few GB of images
+   ```
+
+   `db:start` prints the local URL and keys. Point `.env.local` at those to
+   develop against local data instead of the hosted project, and restart
+   `yarn dev` — `NEXT_PUBLIC_` variables are inlined at build time.
+
+   Studio, a browser UI for the tables, runs at http://127.0.0.1:54323. It
+   connects as superuser and so bypasses RLS: it shows every row, not what a
+   signed-in user would see. Only the pgTAP tests check the policies.
+
+   Note that `db:start` applies migrations **only when creating the database**.
+   Once it exists, new migrations pulled from git need `yarn db:up`.
+
 ## Scripts
 
 | Command | Does |
@@ -62,6 +83,11 @@ No application tables yet — add migrations under `supabase/migrations/`.
 | `yarn start` | Serve the production build |
 | `yarn lint` | ESLint |
 | `yarn typecheck` | `tsc --noEmit` |
+| `yarn db:start` | Start the local Supabase stack (needs Docker) |
+| `yarn db:stop` | Stop it again |
+| `yarn db:up` | Apply migrations that exist as files but not yet in the local database |
+| `yarn db:reset` | Drop the local database and replay every migration |
+| `yarn db:test` | Run the pgTAP tests in `supabase/tests/database/` |
 
 ## Layout
 
@@ -94,7 +120,10 @@ src/
     safe-path.ts    Same-origin guard for redirect targets
     supabase/       Browser, server and proxy clients
   proxy.ts          Refreshes the session, gates protected routes
-supabase/migrations/
+supabase/
+  migrations/     Schema, applied in filename order
+  tests/database/ pgTAP tests, run with `yarn db:test`
+  config.toml     Local stack settings
 ```
 
 ## Deploying to Vercel
@@ -121,11 +150,31 @@ hostname — see `origin()` in `src/lib/auth/actions.ts`. Override it with
 
 ## Adding data
 
-1. Write a migration in `supabase/migrations/` that creates the table, enables
-   Row Level Security, and adds policies. Without policies the table is
-   readable by nobody.
-2. Query it with `graphqlQuery` — `pg_graphql` picks up the new table
+1. `yarn supabase migration new <name>` for a timestamped file in
+   `supabase/migrations/`. Create the table, enable Row Level Security, and add
+   policies. Without policies the table is readable by nobody.
+2. `yarn db:reset` replays every migration from scratch, which is the only way
+   to know the whole set still applies in order.
+3. Cover the policies with a pgTAP test in `supabase/tests/database/` and run
+   `yarn db:test`. RLS mistakes are invisible until someone sees another user's
+   rows, so they are worth a test even when nothing else is.
+4. Query it with `graphqlQuery` — `pg_graphql` picks up the new table
    automatically, no codegen step or server redeploy.
+
+Reference data that every environment needs (the platform and industry lists,
+for instance) goes in a migration with `on conflict do nothing`, not in
+`supabase/seed.sql` — seed.sql only runs locally, and only on reset. Loading
+seed.sql is switched off in `config.toml` for that reason.
+
+Migrations are forward-only: there are no down files to write. `supabase
+migration down` is not a rollback — it replays from scratch up to an earlier
+version and drops your local data doing it. To undo a migration that has already
+been pushed, write a new one that reverses it. Locally, deleting the file and
+running `yarn db:reset` is simpler.
+
+After pulling someone else's migrations, `yarn db:up` applies the new ones and
+keeps your local data; `yarn db:reset` throws the data away and replays
+everything from the first migration.
 
 Reads go through GraphQL; writes are usually terser through `supabase-js`
 (`createClient().from(...)`), which enforces the same policies.
