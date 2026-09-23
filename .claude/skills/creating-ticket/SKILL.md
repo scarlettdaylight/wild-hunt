@@ -47,7 +47,7 @@ so that **<why it matters>**.
 
 - Design: <Figma link, or n/a>
 - Depends on: <WH-00, or nothing>
-- Notes: <constraint or decision worth knowing up front>
+- <constraint or decision worth knowing up front>
 ```
 
 Add AC2, AC3 and so on as needed. Every criterion must be observable — if it cannot be checked
