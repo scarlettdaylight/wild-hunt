@@ -3,16 +3,15 @@ import { locale } from "next/root-params";
 
 import { getTranslation } from "@/i18n/server";
 import type { Locale } from "@/i18n/settings";
-import { createClient } from "@/lib/supabase/server";
 import { localizedPath, ROUTES } from "@/lib/routes";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SignOutButton } from "./SignOutButton";
+import { getAuthUser } from "@/lib/auth/getAuthUser";
+import { ReactNode } from "react";
 
-export async function SiteHeader({ leading }: { leading?: React.ReactNode }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+export async function SiteHeader({ leading }: { leading?: ReactNode }) {
+  const user = await getAuthUser();
+
   const currentLocale = (await locale()) as Locale;
   const { t } = await getTranslation(currentLocale);
 
