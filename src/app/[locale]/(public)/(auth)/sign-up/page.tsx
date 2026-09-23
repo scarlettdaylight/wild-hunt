@@ -1,19 +1,17 @@
-import { locale } from "next/root-params";
 import { Suspense } from "react";
 
-import { getTranslation } from "@/i18n/server";
-import type { Locale } from "@/i18n/settings";
+import { getCurrentLocaleTranslation } from "@/lib/getCurrentLocaleTranslation";
 import { AuthForm } from "@/components/form/AuthForm";
 import { signUp } from "@/lib/auth/actions";
 import { ROUTES } from "@/lib/routes";
 
 export async function generateMetadata() {
-  const { t } = await getTranslation((await locale()) as Locale);
+  const { t } = await getCurrentLocaleTranslation();
   return { title: t("auth.signUp.metaTitle") };
 }
 
 export default async function SignUpPage() {
-  const { t } = await getTranslation((await locale()) as Locale);
+  const { t } = await getCurrentLocaleTranslation();
 
   return (
     <Suspense>

@@ -1,16 +1,13 @@
-import { locale } from "next/root-params";
-
-import { getTranslation } from "@/i18n/server";
-import type { Locale } from "@/i18n/settings";
+import { getCurrentLocaleTranslation } from "@/lib/getCurrentLocaleTranslation";
 
 export async function generateMetadata() {
-  const { t } = await getTranslation((await locale()) as Locale);
+  const { t } = await getCurrentLocaleTranslation();
   return { title: t("jobs.metaTitle") };
 }
 
 /** Applications being tracked, with their stage in the process. */
 export default async function JobsPage() {
-  const { t } = await getTranslation((await locale()) as Locale);
+  const { t } = await getCurrentLocaleTranslation();
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-12">

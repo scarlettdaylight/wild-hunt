@@ -4,7 +4,7 @@ import { type EmailOtpType } from "@supabase/supabase-js";
 
 import { createClient } from "@/lib/supabase/server";
 import { safePath } from "@/lib/safe-path";
-import { localizedPath, ROUTES } from "@/lib/routes";
+import { buildLocalizedPath, ROUTES } from "@/lib/routes";
 
 /**
  * Landing point for every emailed auth link — signup confirmation and password
@@ -26,7 +26,7 @@ export async function GET(
 
   if (!tokenHash || !type) {
     redirect(
-      `${localizedPath(locale, ROUTES.authError)}?error=Missing+token+hash+or+type`,
+      `${buildLocalizedPath(locale, ROUTES.authError)}?error=Missing+token+hash+or+type`,
     );
   }
 
@@ -38,9 +38,9 @@ export async function GET(
 
   if (error) {
     redirect(
-      `${localizedPath(locale, ROUTES.authError)}?error=${encodeURIComponent(error.message)}`,
+      `${buildLocalizedPath(locale, ROUTES.authError)}?error=${encodeURIComponent(error.message)}`,
     );
   }
 
-  redirect(localizedPath(locale, safePath(next, ROUTES.dashboard)));
+  redirect(buildLocalizedPath(locale, safePath(next, ROUTES.dashboard)));
 }
