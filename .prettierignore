@@ -1,0 +1,14 @@
+.next/
+.yarn/
+build/
+out/
+coverage/
+yarn.lock
+tsconfig.tsbuildinfo
+
+# Rewritten by `next dev` (see next/dist/server/lib/generate-agent-files.js)
+AGENTS.md
+CLAUDE.md
+
+# Hand-tuned prompt files
+.claude/
