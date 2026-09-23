@@ -54,11 +54,11 @@ async function origin() {
 
 export async function signIn(
   _prevState: AuthState,
-  formData: FormData
+  formData: FormData,
 ): Promise<AuthState> {
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword(
-    credentials(formData)
+    credentials(formData),
   );
 
   if (error) return { error: error.message };
@@ -68,14 +68,14 @@ export async function signIn(
   redirect(
     localizedPath(
       formLocale(formData),
-      safePath(formData.get("redirect"), ROUTES.dashboard)
-    )
+      safePath(formData.get("redirect"), ROUTES.dashboard),
+    ),
   );
 }
 
 export async function signUp(
   _prevState: AuthState,
-  formData: FormData
+  formData: FormData,
 ): Promise<AuthState> {
   const supabase = await createClient();
   const locale = formLocale(formData);
@@ -86,7 +86,7 @@ export async function signUp(
       // token for a session, then forwards to `next`.
       emailRedirectTo: `${await origin()}${localizedPath(
         locale,
-        ROUTES.confirm
+        ROUTES.confirm,
       )}?next=${ROUTES.dashboard}`,
     },
   });
@@ -98,7 +98,7 @@ export async function signUp(
 
 export async function signOut(
   _prevState: AuthState,
-  formData: FormData
+  formData: FormData,
 ): Promise<AuthState> {
   const supabase = await createClient();
   const locale = formLocale(formData);
@@ -109,7 +109,7 @@ export async function signOut(
 
 export async function requestPasswordReset(
   _prevState: AuthState,
-  formData: FormData
+  formData: FormData,
 ): Promise<AuthState> {
   const supabase = await createClient();
   const locale = formLocale(formData);
@@ -118,9 +118,9 @@ export async function requestPasswordReset(
     {
       redirectTo: `${await origin()}${localizedPath(
         locale,
-        ROUTES.confirm
+        ROUTES.confirm,
       )}?next=${ROUTES.updatePassword}`,
-    }
+    },
   );
 
   if (error) return { error: error.message };
@@ -132,7 +132,7 @@ export async function requestPasswordReset(
 
 export async function updatePassword(
   _prevState: AuthState,
-  formData: FormData
+  formData: FormData,
 ): Promise<AuthState> {
   const supabase = await createClient();
 

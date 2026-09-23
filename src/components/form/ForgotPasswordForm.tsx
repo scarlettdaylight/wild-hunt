@@ -51,7 +51,10 @@ export function ForgotPasswordForm() {
           required
         />
         <FormError message={state?.error} />
-        <SubmitButton pending={pending} pendingLabel={t("auth.forgotPassword.sending")}>
+        <SubmitButton
+          pending={pending}
+          pendingLabel={t("auth.forgotPassword.sending")}
+        >
           {t("auth.forgotPassword.submit")}
         </SubmitButton>
       </form>

@@ -13,7 +13,10 @@ import { SubmitButton } from "./SubmitButton";
 export function UpdatePasswordForm() {
   const { t } = useTranslation();
   const { locale } = useParams<{ locale: string }>();
-  const [state, formAction, pending] = useActionState(updatePassword, undefined);
+  const [state, formAction, pending] = useActionState(
+    updatePassword,
+    undefined,
+  );
 
   return (
     <FormShell title={t("auth.updatePassword.title")}>
@@ -28,7 +31,10 @@ export function UpdatePasswordForm() {
           required
         />
         <FormError message={state?.error} />
-        <SubmitButton pending={pending} pendingLabel={t("auth.updatePassword.saving")}>
+        <SubmitButton
+          pending={pending}
+          pendingLabel={t("auth.updatePassword.saving")}
+        >
           {t("auth.updatePassword.submit")}
         </SubmitButton>
       </form>

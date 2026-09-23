@@ -2,7 +2,12 @@ import { NextResponse, type NextRequest } from "next/server";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
-import { defaultLocale, locales, localeCookie, type Locale } from "@/i18n/settings";
+import {
+  defaultLocale,
+  locales,
+  localeCookie,
+  type Locale,
+} from "@/i18n/settings";
 import { updateSession } from "@/lib/supabase/proxy";
 
 function hasLocalePrefix(pathname: string) {

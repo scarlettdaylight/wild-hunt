@@ -21,7 +21,9 @@ export default async function AuthErrorPage({
   return (
     <FormShell
       title={t("auth.error.title")}
-      description={typeof error === "string" ? error : t("auth.error.unspecified")}
+      description={
+        typeof error === "string" ? error : t("auth.error.unspecified")
+      }
     >
       <Link
         href={localizedPath(currentLocale, ROUTES.login)}
