@@ -11,9 +11,7 @@ export function FormShell({
     <div className="mx-auto w-full max-w-sm px-6 py-16">
       <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
       {description && (
-        <p className="mt-2 text-sm leading-relaxed text-muted">
-          {description}
-        </p>
+        <p className="mt-2 text-sm leading-relaxed text-muted">{description}</p>
       )}
       {children}
     </div>

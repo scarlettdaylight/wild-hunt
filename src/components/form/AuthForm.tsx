@@ -37,7 +37,9 @@ export function AuthForm({
     <FormShell title={title}>
       <form action={formAction} className="mt-8 flex flex-col gap-4">
         <input type="hidden" name="locale" value={locale} />
-        {redirectTo && <input type="hidden" name="redirect" value={redirectTo} />}
+        {redirectTo && (
+          <input type="hidden" name="redirect" value={redirectTo} />
+        )}
 
         <Field
           label={t("auth.fields.email")}
@@ -50,7 +52,9 @@ export function AuthForm({
           label={t("auth.fields.password")}
           type="password"
           name="password"
-          autoComplete={showForgotPassword ? "current-password" : "new-password"}
+          autoComplete={
+            showForgotPassword ? "current-password" : "new-password"
+          }
           minLength={6}
           required
         />

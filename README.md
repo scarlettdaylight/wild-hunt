@@ -6,14 +6,14 @@ Next.js 16 (App Router, React 19) + Supabase starter.
 
 There is no backend service to run. Supabase supplies the whole data tier:
 
-| Concern | Provided by |
-| --- | --- |
-| Storage | Supabase Postgres |
-| GraphQL API | `pg_graphql`, auto-generated from the schema at `/graphql/v1` |
-| Auth | Supabase Auth, session in cookies via `@supabase/ssr` |
-| Authorization | Row Level Security policies on each table |
+| Concern       | Provided by                                                   |
+| ------------- | ------------------------------------------------------------- |
+| Storage       | Supabase Postgres                                             |
+| GraphQL API   | `pg_graphql`, auto-generated from the schema at `/graphql/v1` |
+| Auth          | Supabase Auth, session in cookies via `@supabase/ssr`         |
+| Authorization | Row Level Security policies on each table                     |
 
-The database schema *is* the API. Adding a column adds it to the GraphQL
+The database schema _is_ the API. Adding a column adds it to the GraphQL
 schema, and the only place authorization lives is the RLS policies on the table.
 
 ## What's here
@@ -76,18 +76,18 @@ schema, and the only place authorization lives is the RLS policies on the table.
 
 ## Scripts
 
-| Command | Does |
-| --- | --- |
-| `yarn dev` | Dev server on http://localhost:3000 |
-| `yarn build` | Production build |
-| `yarn start` | Serve the production build |
-| `yarn lint` | ESLint |
-| `yarn typecheck` | `tsc --noEmit` |
-| `yarn db:start` | Start the local Supabase stack (needs Docker) |
-| `yarn db:stop` | Stop it again |
-| `yarn db:up` | Apply migrations that exist as files but not yet in the local database |
-| `yarn db:reset` | Drop the local database and replay every migration |
-| `yarn db:test` | Run the pgTAP tests in `supabase/tests/database/` |
+| Command          | Does                                                                   |
+| ---------------- | ---------------------------------------------------------------------- |
+| `yarn dev`       | Dev server on http://localhost:3000                                    |
+| `yarn build`     | Production build                                                       |
+| `yarn start`     | Serve the production build                                             |
+| `yarn lint`      | ESLint                                                                 |
+| `yarn typecheck` | `tsc --noEmit`                                                         |
+| `yarn db:start`  | Start the local Supabase stack (needs Docker)                          |
+| `yarn db:stop`   | Stop it again                                                          |
+| `yarn db:up`     | Apply migrations that exist as files but not yet in the local database |
+| `yarn db:reset`  | Drop the local database and replay every migration                     |
+| `yarn db:test`   | Run the pgTAP tests in `supabase/tests/database/`                      |
 
 ## Layout
 

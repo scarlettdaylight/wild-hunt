@@ -70,8 +70,12 @@ export function Sidebar() {
             type="button"
             onClick={toggleCollapsed}
             aria-expanded={!collapsed}
-            aria-label={collapsed ? t("nav.expandSidebar") : t("nav.collapseSidebar")}
-            title={collapsed ? t("nav.expandSidebar") : t("nav.collapseSidebar")}
+            aria-label={
+              collapsed ? t("nav.expandSidebar") : t("nav.collapseSidebar")
+            }
+            title={
+              collapsed ? t("nav.expandSidebar") : t("nav.collapseSidebar")
+            }
             className={`hidden h-8 w-8 shrink-0 items-center justify-center rounded-md text-off-white/70 transition-colors hover:bg-white/10 hover:text-off-white md:flex ${
               collapsed ? "md:self-center" : "md:self-end"
             }`}
@@ -88,7 +92,8 @@ export function Sidebar() {
               {SECTIONS.map(({ href, labelKey, Icon }) => {
                 const localizedHref = localizedPath(locale, href);
                 const active =
-                  pathname === localizedHref || pathname.startsWith(`${localizedHref}/`);
+                  pathname === localizedHref ||
+                  pathname.startsWith(`${localizedHref}/`);
                 const label = t(`nav.${labelKey}`);
 
                 return (

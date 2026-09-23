@@ -4,7 +4,7 @@ import { getTranslation } from "@/i18n/server";
 import { locales, type Locale } from "@/i18n/settings";
 import { TranslationsProvider } from "@/i18n/TranslationsProvider";
 import "../globals.css";
-import {fontClassName} from "@/lib/fonts"
+import { fontClassName } from "@/lib/fonts";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

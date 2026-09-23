@@ -9,7 +9,10 @@ export const defaultNS = "translation";
 /** Remembers the last locale a visitor picked, so a bare `/` redirects there next time. */
 export const localeCookie = "wild-hunt-locale";
 
-export function getOptions(locale: Locale = defaultLocale, ns: string | string[] = defaultNS) {
+export function getOptions(
+  locale: Locale = defaultLocale,
+  ns: string | string[] = defaultNS,
+) {
   return {
     supportedLngs: locales,
     fallbackLng: defaultLocale,
