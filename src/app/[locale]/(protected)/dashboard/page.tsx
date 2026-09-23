@@ -2,7 +2,7 @@ import { locale } from "next/root-params";
 
 import { getTranslation } from "@/i18n/server";
 import type { Locale } from "@/i18n/settings";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthUser } from "@/lib/auth/getAuthUser";
 
 export async function generateMetadata() {
   const { t } = await getTranslation((await locale()) as Locale);
@@ -11,10 +11,7 @@ export async function generateMetadata() {
 
 /** Overview of the hunt: counts, recent activity, whatever needs attention. */
 export default async function DashboardPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
   const { t } = await getTranslation((await locale()) as Locale);
 
   return (
