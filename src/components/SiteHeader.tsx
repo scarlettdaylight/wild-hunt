@@ -1,19 +1,16 @@
 import Link from "next/link";
-import { locale } from "next/root-params";
 
-import { getTranslation } from "@/i18n/server";
-import type { Locale } from "@/i18n/settings";
-import { localizedPath, ROUTES } from "@/lib/routes";
+import { ROUTES } from "@/lib/routes";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SignOutButton } from "./SignOutButton";
 import { getAuthUser } from "@/lib/auth/getAuthUser";
 import { ReactNode } from "react";
+import { getCurrentLocaleTranslation } from "@/lib/getCurrentLocaleTranslation";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
 
 export async function SiteHeader({ leading }: { leading?: ReactNode }) {
   const user = await getAuthUser();
-
-  const currentLocale = (await locale()) as Locale;
-  const { t } = await getTranslation(currentLocale);
+  const { t } = await getCurrentLocaleTranslation();
 
   return (
     <header className="border-b border-hairline bg-off-white">
@@ -22,7 +19,7 @@ export async function SiteHeader({ leading }: { leading?: ReactNode }) {
           {/* The (protected) layout passes the drawer trigger in here. */}
           {leading}
           <Link
-            href={localizedPath(currentLocale, ROUTES.home)}
+            href={await getLocalizedPath(ROUTES.home)}
             className="font-semibold tracking-tight"
           >
             {t("common.brand")}
@@ -34,7 +31,7 @@ export async function SiteHeader({ leading }: { leading?: ReactNode }) {
             <SignOutButton />
           ) : (
             <Link
-              href={localizedPath(currentLocale, ROUTES.login)}
+              href={await getLocalizedPath(ROUTES.login)}
               className="underline-offset-4 hover:underline"
             >
               {t("common.signIn")}

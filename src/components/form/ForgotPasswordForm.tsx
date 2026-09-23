@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { requestPasswordReset } from "@/lib/auth/actions";
-import { localizedPath, ROUTES } from "@/lib/routes";
+import { buildLocalizedPath, ROUTES } from "@/lib/routes";
 import { Field } from "./Field";
 import { FormError } from "./FormError";
 import { FormShell } from "./FormShell";
@@ -27,7 +27,7 @@ export function ForgotPasswordForm() {
         description={t("auth.forgotPassword.sentDescription")}
       >
         <Link
-          href={localizedPath(locale, ROUTES.login)}
+          href={buildLocalizedPath(locale, ROUTES.login)}
           className="mt-6 inline-block text-sm text-link underline underline-offset-4 hover:text-link-hover"
         >
           {t("common.backToSignIn")}
@@ -62,7 +62,7 @@ export function ForgotPasswordForm() {
       <p className="mt-6 text-sm text-muted">
         {t("auth.forgotPassword.remembered")}{" "}
         <Link
-          href={localizedPath(locale, ROUTES.login)}
+          href={buildLocalizedPath(locale, ROUTES.login)}
           className="text-link underline underline-offset-4 hover:text-link-hover"
         >
           {t("auth.signIn.title")}

@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 import type { Locale } from "@/i18n/settings";
 import { createClient } from "@/lib/supabase/server";
 import { safePath } from "@/lib/safe-path";
-import { localizedPath, ROUTES } from "@/lib/routes";
+import { buildLocalizedPath, ROUTES } from "@/lib/routes";
 
 export type AuthState = { error?: string; sent?: boolean } | undefined;
 
@@ -66,7 +66,7 @@ export async function signIn(
   // The layout reads the session, so the cached shell has to go too.
   revalidatePath("/", "layout");
   redirect(
-    localizedPath(
+    buildLocalizedPath(
       formLocale(formData),
       safePath(formData.get("redirect"), ROUTES.dashboard),
     ),
@@ -84,7 +84,7 @@ export async function signUp(
     options: {
       // Where the confirmation link lands: the confirm route exchanges the
       // token for a session, then forwards to `next`.
-      emailRedirectTo: `${await origin()}${localizedPath(
+      emailRedirectTo: `${await origin()}${buildLocalizedPath(
         locale,
         ROUTES.confirm,
       )}?next=${ROUTES.dashboard}`,
@@ -93,7 +93,7 @@ export async function signUp(
 
   if (error) return { error: error.message };
 
-  redirect(localizedPath(locale, ROUTES.checkEmail));
+  redirect(buildLocalizedPath(locale, ROUTES.checkEmail));
 }
 
 export async function signOut(
@@ -104,7 +104,7 @@ export async function signOut(
   const locale = formLocale(formData);
   await supabase.auth.signOut();
   revalidatePath("/", "layout");
-  redirect(localizedPath(locale, ROUTES.home));
+  redirect(buildLocalizedPath(locale, ROUTES.home));
 }
 
 export async function requestPasswordReset(
@@ -116,7 +116,7 @@ export async function requestPasswordReset(
   const { error } = await supabase.auth.resetPasswordForEmail(
     String(formData.get("email") ?? ""),
     {
-      redirectTo: `${await origin()}${localizedPath(
+      redirectTo: `${await origin()}${buildLocalizedPath(
         locale,
         ROUTES.confirm,
       )}?next=${ROUTES.updatePassword}`,
@@ -144,5 +144,5 @@ export async function updatePassword(
   if (error) return { error: error.message };
 
   revalidatePath("/", "layout");
-  redirect(localizedPath(formLocale(formData), ROUTES.dashboard));
+  redirect(buildLocalizedPath(formLocale(formData), ROUTES.dashboard));
 }

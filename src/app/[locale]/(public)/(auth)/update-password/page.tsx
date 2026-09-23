@@ -1,11 +1,8 @@
-import { locale } from "next/root-params";
-
-import { getTranslation } from "@/i18n/server";
-import type { Locale } from "@/i18n/settings";
+import { getCurrentLocaleTranslation } from "@/lib/getCurrentLocaleTranslation";
 import { UpdatePasswordForm } from "@/components/form/UpdatePasswordForm";
 
 export async function generateMetadata() {
-  const { t } = await getTranslation((await locale()) as Locale);
+  const { t } = await getCurrentLocaleTranslation();
   return { title: t("auth.updatePassword.metaTitle") };
 }
 

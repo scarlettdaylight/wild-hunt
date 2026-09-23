@@ -46,6 +46,6 @@ export const PUBLIC_ROUTES = [
  * URL on its own — this is what turns one into the path a `Link` or `redirect`
  * actually needs.
  */
-export function localizedPath(locale: string, route: string) {
+export function buildLocalizedPath(locale: string, route: string) {
   return route === "/" ? `/${locale}` : `/${locale}${route}`;
 }

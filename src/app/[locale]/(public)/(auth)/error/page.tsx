@@ -1,13 +1,12 @@
 import Link from "next/link";
-import { locale } from "next/root-params";
 
-import { getTranslation } from "@/i18n/server";
-import type { Locale } from "@/i18n/settings";
+import { getCurrentLocaleTranslation } from "@/lib/getCurrentLocaleTranslation";
 import { FormShell } from "@/components/form/FormShell";
-import { localizedPath, ROUTES } from "@/lib/routes";
+import { ROUTES } from "@/lib/routes";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
 
 export async function generateMetadata() {
-  const { t } = await getTranslation((await locale()) as Locale);
+  const { t } = await getCurrentLocaleTranslation();
   return { title: t("auth.error.metaTitle") };
 }
 
@@ -15,8 +14,7 @@ export default async function AuthErrorPage({
   searchParams,
 }: PageProps<"/[locale]/error">) {
   const { error } = await searchParams;
-  const currentLocale = (await locale()) as Locale;
-  const { t } = await getTranslation(currentLocale);
+  const { t } = await getCurrentLocaleTranslation();
 
   return (
     <FormShell
@@ -26,7 +24,7 @@ export default async function AuthErrorPage({
       }
     >
       <Link
-        href={localizedPath(currentLocale, ROUTES.login)}
+        href={await getLocalizedPath(ROUTES.login)}
         className="mt-6 inline-block text-sm underline underline-offset-4"
       >
         {t("common.backToSignIn")}

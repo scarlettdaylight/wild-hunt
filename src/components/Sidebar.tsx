@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { localizedPath, ROUTES } from "@/lib/routes";
+import { buildLocalizedPath, ROUTES } from "@/lib/routes";
 import { useSidebar } from "./SidebarProvider";
 import {
   ChevronLeftIcon,
@@ -90,7 +90,7 @@ export function Sidebar() {
           <nav>
             <ul className="flex flex-col gap-1">
               {SECTIONS.map(({ href, labelKey, Icon }) => {
-                const localizedHref = localizedPath(locale, href);
+                const localizedHref = buildLocalizedPath(locale, href);
                 const active =
                   pathname === localizedHref ||
                   pathname.startsWith(`${localizedHref}/`);
