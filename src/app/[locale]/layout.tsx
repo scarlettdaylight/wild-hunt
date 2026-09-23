@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-
 import { getTranslation } from "@/i18n/server";
 import { locales, type Locale } from "@/i18n/settings";
 import { TranslationsProvider } from "@/i18n/TranslationsProvider";
 import "../globals.css";
+import {fontClassName} from "@/lib/fonts"
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -22,11 +22,6 @@ export async function generateMetadata(
   };
 }
 
-/**
- * The document shell, and nothing else. The header belongs to each route group's
- * layout rather than here, so the signed-in sidebar can run the full height of
- * the window with the header beside it instead of above it.
- */
 export default async function RootLayout({
   children,
   params,
@@ -37,7 +32,7 @@ export default async function RootLayout({
   const { i18n } = await getTranslation(locale as Locale);
 
   return (
-    <html lang={locale} className="h-full antialiased">
+    <html lang={locale} className={`${fontClassName} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <TranslationsProvider
           locale={locale as Locale}
