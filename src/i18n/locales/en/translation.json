@@ -21,9 +21,35 @@
     "collapseSidebar": "Collapse sidebar"
   },
   "home": {
-    "tagline": "Next.js and Supabase starter — auth, session handling and a GraphQL client, ready to build on.",
-    "getStarted": "Get started",
-    "goToApp": "Go to app"
+    "headline": "Every application is a card worth catching.",
+    "tagline": "Track applications, prep answers and keep the streak alive.",
+    "features": {
+      "companion": {
+        "title": "An avatar that talks back",
+        "body": "Your companion reacts to every application, nudges you when the streak is at risk and cheers the wins."
+      },
+      "progress": {
+        "title": "Gamified progress",
+        "body": "Earn EXP per application and drill, level up your trainer rank, and collect each role as a card."
+      },
+      "studio": {
+        "title": "CV & cover letter studio",
+        "body": "Generate a tailored draft per role, then edit it side by side with the job description."
+      },
+      "interviews": {
+        "title": "Interview technique library",
+        "body": "A STAR answer bank, self-introduction scripts and a graded coding-question set."
+      }
+    },
+    "signIn": {
+      "eyebrow": "Welcome back",
+      "title": "Sign in to your hunt",
+      "noAccount": "No account yet?",
+      "onboard": "Sign up to onboard",
+      "emailPlaceholder": "jane.doe@email.com",
+      "submit": "Continue",
+      "signUp": "Sign up"
+    }
   },
   "dashboard": {
     "metaTitle": "Dashboard · Wild Hunt",

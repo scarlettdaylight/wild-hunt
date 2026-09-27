@@ -21,9 +21,35 @@
     "collapseSidebar": "收合側邊欄"
   },
   "home": {
-    "tagline": "Next.js 與 Supabase 入門專案 — 已內建驗證、工作階段處理與 GraphQL 客戶端，隨時可以開始開發。",
-    "getStarted": "開始使用",
-    "goToApp": "前往應用程式"
+    "headline": "每一次投遞，都是一張值得收藏的卡牌。",
+    "tagline": "追蹤投遞進度、準備面試答案，讓連續紀錄不中斷。",
+    "features": {
+      "companion": {
+        "title": "會回話的夥伴",
+        "body": "你的夥伴會回應每一次投遞，在連續紀錄快中斷時提醒你，也為每個好消息喝采。"
+      },
+      "progress": {
+        "title": "遊戲化的成長歷程",
+        "body": "每次投遞與練習都能獲得 EXP，提升訓練家等級，並把每個職位收藏成卡牌。"
+      },
+      "studio": {
+        "title": "履歷與求職信工作室",
+        "body": "為每個職位生成量身打造的草稿，再對照職缺描述並排編輯。"
+      },
+      "interviews": {
+        "title": "面試技巧資料庫",
+        "body": "STAR 答題範例庫、自我介紹腳本，以及分級的程式題庫。"
+      }
+    },
+    "signIn": {
+      "eyebrow": "歡迎回來",
+      "title": "登入你的狩獵旅程",
+      "noAccount": "還沒有帳號？",
+      "onboard": "註冊並開始設定",
+      "emailPlaceholder": "jane.doe@email.com",
+      "submit": "繼續",
+      "signUp": "註冊"
+    }
   },
   "dashboard": {
     "metaTitle": "儀表板 · Wild Hunt",
