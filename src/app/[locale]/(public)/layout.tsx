@@ -1,15 +1,5 @@
-import { SiteHeader } from "@/components/SiteHeader";
+const PublicLayout = ({ children }: { children: React.ReactNode }) => {
+  return children;
+};
 
-/** Public chrome: a header across the top, content beneath it. */
-export default function PublicLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <>
-      <SiteHeader />
-      <main className="flex flex-1 flex-col">{children}</main>
-    </>
-  );
-}
+export default PublicLayout;

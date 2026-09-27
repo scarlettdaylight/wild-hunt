@@ -20,6 +20,10 @@
   --color-label: #8b98a8; /* mono labels, muted */
   --color-faint: #93a0af; /* faintest text */
 
+  /* Text on the navy panel, where the light-background scale is unreadable */
+  --color-on-navy: #bbd7ee; /* body copy */
+  --color-on-navy-label: #7fb3df; /* mono labels */
+
   /* Lines & fills */
   --color-hairline: #e3d9c6; /* default borders */
   --color-hairline-card: #e0d5c0; /* card borders */

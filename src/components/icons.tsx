@@ -1,8 +1,3 @@
-/**
- * Inline 24px icons, stroked in `currentColor` so they inherit the link colour.
- * Hand-written rather than pulled from an icon package — the sidebar rail is the
- * only thing that needs them.
- */
 type IconProps = { className?: string };
 
 const BASE = {
@@ -15,7 +10,7 @@ const BASE = {
   "aria-hidden": true,
 } as const;
 
-export function DashboardIcon({ className }: IconProps) {
+export const DashboardIcon = ({ className }: IconProps) => {
   return (
     <svg {...BASE} className={className}>
       <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -26,7 +21,7 @@ export function DashboardIcon({ className }: IconProps) {
   );
 }
 
-export function JobsIcon({ className }: IconProps) {
+export const JobsIcon = ({ className }: IconProps) => {
   return (
     <svg {...BASE} className={className}>
       <rect x="2" y="7" width="20" height="14" rx="2" />
@@ -35,7 +30,7 @@ export function JobsIcon({ className }: IconProps) {
   );
 }
 
-export function DocumentsIcon({ className }: IconProps) {
+export const DocumentsIcon = ({ className }: IconProps) => {
   return (
     <svg {...BASE} className={className}>
       <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
@@ -46,7 +41,7 @@ export function DocumentsIcon({ className }: IconProps) {
   );
 }
 
-export function SettingsIcon({ className }: IconProps) {
+export const SettingsIcon = ({ className }: IconProps) => {
   return (
     <svg {...BASE} className={className}>
       <path d="M4 7h10" />
@@ -59,8 +54,7 @@ export function SettingsIcon({ className }: IconProps) {
   );
 }
 
-/** Points left when the sidebar is open; flipped by the caller when collapsed. */
-export function ChevronLeftIcon({ className }: IconProps) {
+export const ChevronLeftIcon = ({ className }: IconProps) => {
   return (
     <svg {...BASE} className={className}>
       <path d="M15 18l-6-6 6-6" />
@@ -68,7 +62,7 @@ export function ChevronLeftIcon({ className }: IconProps) {
   );
 }
 
-export function MenuIcon({ className }: IconProps) {
+export const MenuIcon = ({ className }: IconProps) => {
   return (
     <svg {...BASE} className={className}>
       <path d="M4 6h16" />
@@ -78,11 +72,60 @@ export function MenuIcon({ className }: IconProps) {
   );
 }
 
-export function CloseIcon({ className }: IconProps) {
+export const CloseIcon = ({ className }: IconProps) => {
   return (
     <svg {...BASE} className={className}>
       <path d="M18 6L6 18" />
       <path d="M6 6l12 12" />
+    </svg>
+  );
+}
+
+export const CardsMarkIcon = ({ className }: IconProps) => {
+  return (
+    <svg {...BASE} className={className}>
+      <rect x="9" y="3" width="11" height="15" rx="2" />
+      <path d="M15 21H6a2 2 0 0 1-2-2V8" />
+    </svg>
+  );
+}
+
+export const CompanionIcon = ({ className }: IconProps) => {
+  return (
+    <svg {...BASE} className={className}>
+      <path d="M20 11.5a7.5 7.5 0 0 1-8.5 7.4L7 21l.5-3.2A7.5 7.5 0 1 1 20 11.5z" />
+      <path d="M9 11h.01" />
+      <path d="M13.5 11h.01" />
+    </svg>
+  );
+}
+
+export const ProgressIcon = ({ className }: IconProps) => {
+  return (
+    <svg {...BASE} className={className}>
+      <path d="M5 20v-5" />
+      <path d="M12 20V9" />
+      <path d="M19 20V4" />
+    </svg>
+  );
+}
+
+export const StudioIcon = ({ className }: IconProps) => {
+  return (
+    <svg {...BASE} className={className}>
+      <path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5" />
+      <path d="M13 3v5h5" />
+      <path d="M17.5 21H15v-2.5l5-5a1.8 1.8 0 0 1 2.5 2.5z" />
+    </svg>
+  );
+}
+
+export const InterviewIcon = ({ className }: IconProps) => {
+  return (
+    <svg {...BASE} className={className}>
+      <path d="M4 5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2z" />
+      <path d="M4 19a2 2 0 0 0 2 2h14" />
+      <path d="M9 7h6" />
     </svg>
   );
 }

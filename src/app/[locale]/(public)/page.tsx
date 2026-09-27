@@ -1,27 +1,31 @@
-import Link from "next/link";
+import { redirect } from "next/navigation";
 
-import { getCurrentLocaleTranslation } from "@/lib/getCurrentLocaleTranslation";
-import { ROUTES } from "@/lib/routes";
-import { getLocalizedPath } from "@/lib/getLocalizedPath";
 import { getAuthUser } from "@/lib/auth/getAuthUser";
+import { getLocalizedPath } from "@/lib/getLocalizedPath";
+import { ROUTES } from "@/lib/routes";
+import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { Hero } from "@/components/landing/Hero";
+import { SignInPanel } from "@/components/landing/SignInPanel";
 
-export default async function Home() {
+const Home = async () => {
   const user = await getAuthUser();
-  const { t } = await getCurrentLocaleTranslation();
+  if (user) redirect(await getLocalizedPath(ROUTES.dashboard));
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-6 py-24">
-      <h1 className="font-serif text-4xl font-bold tracking-tight">
-        {t("common.brand")}
-      </h1>
-      <p className="mt-4 max-w-prose text-muted">{t("home.tagline")}</p>
+    <main className="flex flex-1 flex-col lg:grid lg:grid-cols-[44fr_56fr]">
+      <Hero />
 
-      <Link
-        href={await getLocalizedPath(user ? ROUTES.dashboard : ROUTES.signUp)}
-        className="mt-8 inline-block rounded-md bg-primary px-5 py-2.5 font-serif text-sm font-semibold text-off-white transition-opacity hover:opacity-90"
-      >
-        {user ? t("home.goToApp") : t("home.getStarted")}
-      </Link>
-    </div>
+      <div className="flex flex-1 flex-col px-6 py-8 sm:px-10">
+        <div className="flex justify-end">
+          <LocaleSwitcher />
+        </div>
+
+        <div className="flex flex-1 items-center justify-center py-8">
+          <SignInPanel />
+        </div>
+      </div>
+    </main>
   );
-}
+};
+
+export default Home;
