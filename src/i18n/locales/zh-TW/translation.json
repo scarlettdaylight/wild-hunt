@@ -8,7 +8,7 @@
     "signIn": "登入",
     "signOut": "登出",
     "backToSignIn": "返回登入",
-    "working": "處理中…"
+    "or": "或"
   },
   "nav": {
     "dashboard": "儀表板",
@@ -47,8 +47,10 @@
       "noAccount": "還沒有帳號？",
       "onboard": "註冊並開始設定",
       "emailPlaceholder": "jane.doe@email.com",
-      "submit": "繼續",
-      "signUp": "註冊"
+      "continue": "繼續",
+      "signUp": "註冊",
+      "google": "Google",
+      "linkedIn": "LinkedIn"
     }
   },
   "dashboard": {
@@ -80,7 +82,7 @@
     "signIn": {
       "metaTitle": "登入 · Wild Hunt",
       "title": "登入",
-      "submit": "登入",
+      "signIn": "登入",
       "forgotPassword": "忘記密碼？",
       "noAccount": "還沒有帳號？",
       "createOne": "建立帳號"
@@ -88,7 +90,7 @@
     "signUp": {
       "metaTitle": "建立帳號 · Wild Hunt",
       "title": "建立帳號",
-      "submit": "建立帳號",
+      "signUp": "建立帳號",
       "haveAccount": "已經有帳號了？",
       "signIn": "登入"
     },
@@ -106,8 +108,7 @@
       "metaTitle": "重設密碼 · Wild Hunt",
       "title": "重設密碼",
       "description": "我們會寄送連結給你，讓你選擇新密碼。",
-      "submit": "傳送重設連結",
-      "sending": "傳送中…",
+      "sendResetLink": "傳送重設連結",
       "sentTitle": "請確認你的電子郵件",
       "sentDescription": "如果該地址已註冊帳號，密碼重設連結即將寄出。",
       "remembered": "想起密碼了？"
@@ -115,8 +116,7 @@
     "updatePassword": {
       "metaTitle": "設定新密碼 · Wild Hunt",
       "title": "選擇新密碼",
-      "submit": "儲存密碼",
-      "saving": "儲存中…"
+      "savePassword": "儲存密碼"
     }
   },
   "localeSwitcher": {

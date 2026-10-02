@@ -7,18 +7,15 @@ import { useTranslation } from "react-i18next";
 
 import { requestPasswordReset } from "@/lib/auth/actions";
 import { buildLocalizedPath, ROUTES } from "@/lib/routes";
+import { PrimaryButton } from "@/components/ui/Button";
 import { Field } from "./Field";
 import { FormError } from "./FormError";
 import { FormShell } from "./FormShell";
-import { SubmitButton } from "./SubmitButton";
 
 export function ForgotPasswordForm() {
   const { t } = useTranslation();
   const { locale } = useParams<{ locale: string }>();
-  const [state, formAction, pending] = useActionState(
-    requestPasswordReset,
-    undefined,
-  );
+  const [state, formAction] = useActionState(requestPasswordReset, undefined);
 
   if (state?.sent) {
     return (
@@ -51,12 +48,9 @@ export function ForgotPasswordForm() {
           required
         />
         <FormError message={state?.error} />
-        <SubmitButton
-          pending={pending}
-          pendingLabel={t("auth.forgotPassword.sending")}
-        >
-          {t("auth.forgotPassword.submit")}
-        </SubmitButton>
+        <PrimaryButton type="submit">
+          {t("auth.forgotPassword.sendResetLink")}
+        </PrimaryButton>
       </form>
 
       <p className="mt-6 text-sm text-muted">

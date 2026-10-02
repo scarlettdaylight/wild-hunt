@@ -7,10 +7,10 @@ import { useTranslation } from "react-i18next";
 
 import type { AuthState } from "@/lib/auth/actions";
 import { buildLocalizedPath, ROUTES } from "@/lib/routes";
+import { PrimaryButton } from "@/components/ui/Button";
 import { Field } from "./Field";
 import { FormError } from "./FormError";
 import { FormShell } from "./FormShell";
-import { SubmitButton } from "./SubmitButton";
 
 type Props = {
   title: string;
@@ -30,7 +30,7 @@ export function AuthForm({
 }: Props) {
   const { t } = useTranslation();
   const { locale } = useParams<{ locale: string }>();
-  const [state, formAction, pending] = useActionState(action, undefined);
+  const [state, formAction] = useActionState(action, undefined);
   const redirectTo = useSearchParams().get("redirect");
 
   return (
@@ -69,9 +69,7 @@ export function AuthForm({
         )}
 
         <FormError message={state?.error} />
-        <SubmitButton pending={pending} pendingLabel={t("common.working")}>
-          {submitLabel}
-        </SubmitButton>
+        <PrimaryButton type="submit">{submitLabel}</PrimaryButton>
       </form>
 
       <p className="mt-6 text-sm text-muted">

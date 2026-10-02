@@ -8,7 +8,7 @@
     "signIn": "Sign in",
     "signOut": "Sign out",
     "backToSignIn": "Back to sign in",
-    "working": "Working…"
+    "or": "or"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -47,8 +47,10 @@
       "noAccount": "No account yet?",
       "onboard": "Sign up to onboard",
       "emailPlaceholder": "jane.doe@email.com",
-      "submit": "Continue",
-      "signUp": "Sign up"
+      "continue": "Continue",
+      "signUp": "Sign up",
+      "google": "Google",
+      "linkedIn": "LinkedIn"
     }
   },
   "dashboard": {
@@ -80,7 +82,7 @@
     "signIn": {
       "metaTitle": "Sign in · Wild Hunt",
       "title": "Sign in",
-      "submit": "Sign in",
+      "signIn": "Sign in",
       "forgotPassword": "Forgot password?",
       "noAccount": "No account yet?",
       "createOne": "Create one"
@@ -88,7 +90,7 @@
     "signUp": {
       "metaTitle": "Create account · Wild Hunt",
       "title": "Create account",
-      "submit": "Create account",
+      "signUp": "Create account",
       "haveAccount": "Already have an account?",
       "signIn": "Sign in"
     },
@@ -106,8 +108,7 @@
       "metaTitle": "Reset password · Wild Hunt",
       "title": "Reset password",
       "description": "We'll email you a link to choose a new one.",
-      "submit": "Send reset link",
-      "sending": "Sending…",
+      "sendResetLink": "Send reset link",
       "sentTitle": "Check your email",
       "sentDescription": "If that address has an account, a password reset link is on its way.",
       "remembered": "Remembered it?"
@@ -115,8 +116,7 @@
     "updatePassword": {
       "metaTitle": "New password · Wild Hunt",
       "title": "Choose a new password",
-      "submit": "Save password",
-      "saving": "Saving…"
+      "savePassword": "Save password"
     }
   },
   "localeSwitcher": {

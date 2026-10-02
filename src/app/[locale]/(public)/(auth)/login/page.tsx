@@ -18,7 +18,7 @@ export default async function LoginPage() {
     <Suspense>
       <AuthForm
         title={t("auth.signIn.title")}
-        submitLabel={t("auth.signIn.submit")}
+        submitLabel={t("auth.signIn.signIn")}
         action={signIn}
         showForgotPassword
         footer={{

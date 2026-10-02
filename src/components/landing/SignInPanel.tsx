@@ -2,12 +2,18 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { signIn } from "@/lib/auth/actions";
 import { buildLocalizedPath, ROUTES } from "@/lib/routes";
 import { FormError } from "@/components/form/FormError";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TextButton,
+} from "@/components/ui/Button";
+import { GoogleIcon, LinkedInIcon } from "@/components/icons";
 
 const PanelField = ({
   label,
@@ -26,10 +32,11 @@ const PanelField = ({
   );
 };
 
-export const SignInPanel=() => {
+export const SignInPanel = () => {
   const { t } = useTranslation();
   const { locale } = useParams<{ locale: string }>();
-  const [state, formAction, pending] = useActionState(signIn, undefined);
+  const router = useRouter();
+  const [state, formAction] = useActionState(signIn, undefined);
 
   return (
     <div className="w-full max-w-sm">
@@ -41,12 +48,13 @@ export const SignInPanel=() => {
       </h2>
       <p className="mt-2 text-sm text-subtle">
         {t("home.signIn.noAccount")}{" "}
-        <Link
-          href={buildLocalizedPath(locale, ROUTES.signUp)}
-          className="text-link underline-offset-4 hover:text-link-hover hover:underline"
+        <TextButton
+          type="button"
+          className="text-link hover:text-link-hover hover:underline"
+          onClick={() => router.push(buildLocalizedPath(locale, ROUTES.signUp))}
         >
           {t("home.signIn.onboard")}
-        </Link>
+        </TextButton>
       </p>
 
       <form action={formAction} className="mt-6 flex flex-col gap-4">
@@ -78,21 +86,34 @@ export const SignInPanel=() => {
 
         <FormError message={state?.error} />
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-xl bg-primary px-4 py-3 font-serif text-sm font-bold text-off-white shadow-[inset_0_-3px_0_rgba(0,0,0,0.2)] transition-opacity hover:opacity-90 disabled:opacity-50"
-        >
-          {pending ? t("common.working") : t("home.signIn.submit")}
-        </button>
+        <PrimaryButton type="submit">{t("home.signIn.continue")}</PrimaryButton>
       </form>
 
-      <Link
-        href={buildLocalizedPath(locale, ROUTES.signUp)}
-        className="mt-4 block py-2 text-center font-serif text-sm font-bold text-orange-text transition-colors hover:text-accent"
+      <div className="mt-4 flex items-center gap-3">
+        <div className="h-px flex-1 bg-hairline-card" />
+        <span className="font-mono text-[11px] font-medium tracking-[0.16em] text-faint uppercase">
+          {t("common.or")}
+        </span>
+        <div className="h-px flex-1 bg-hairline-card" />
+      </div>
+
+      <div className="mt-4 flex gap-3">
+        <SecondaryButton className="inline-flex flex-1 items-center justify-center gap-2">
+          <GoogleIcon className="size-5" />
+          {t("home.signIn.google")}
+        </SecondaryButton>
+        <SecondaryButton className="inline-flex flex-1 items-center justify-center gap-2">
+          <LinkedInIcon className="size-5" />
+          {t("home.signIn.linkedIn")}
+        </SecondaryButton>
+      </div>
+      <TextButton
+        type="button"
+        className="mt-4 w-full text-link hover:text-link-hover hover:underline"
+        onClick={() => router.push(buildLocalizedPath(locale, ROUTES.signUp))}
       >
         {t("home.signIn.signUp")}
-      </Link>
+      </TextButton>
     </div>
   );
-}
+};

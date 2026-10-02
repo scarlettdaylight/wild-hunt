@@ -17,7 +17,7 @@ export default async function SignUpPage() {
     <Suspense>
       <AuthForm
         title={t("auth.signUp.title")}
-        submitLabel={t("auth.signUp.submit")}
+        submitLabel={t("auth.signUp.signUp")}
         action={signUp}
         footer={{
           prompt: t("auth.signUp.haveAccount"),
