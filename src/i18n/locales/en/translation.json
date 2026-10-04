@@ -59,7 +59,16 @@
   "jobs": {
     "metaTitle": "Jobs · Wild Hunt",
     "heading": "Jobs",
-    "empty": "Nothing tracked yet."
+    "empty": "Nothing tracked yet.",
+    "loadError": "Your applications could not be loaded.",
+    "retry": "Try again",
+    "status": {
+      "saved": "Saved",
+      "applied": "Applied",
+      "interview": "Interview",
+      "rejected": "Rejected",
+      "offer": "Offer"
+    }
   },
   "documents": {
     "metaTitle": "Documents · Wild Hunt",

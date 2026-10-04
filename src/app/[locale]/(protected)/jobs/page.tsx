@@ -1,3 +1,5 @@
+import { JobApplicationList } from "@/components/jobs/JobApplicationList";
+import { RetryErrorBoundary } from "@/components/RetryErrorBoundary";
 import { getCurrentLocaleTranslation } from "@/lib/getCurrentLocaleTranslation";
 
 export async function generateMetadata() {
@@ -14,9 +16,13 @@ export default async function JobsPage() {
       <h1 className="text-2xl font-semibold tracking-tight">
         {t("jobs.heading")}
       </h1>
-      <p className="mt-2 text-sm text-black/60 dark:text-white/60">
-        {t("jobs.empty")}
-      </p>
+      <RetryErrorBoundary
+        className="mt-2"
+        message={t("jobs.loadError")}
+        retryLabel={t("jobs.retry")}
+      >
+        <JobApplicationList />
+      </RetryErrorBoundary>
     </div>
   );
 }

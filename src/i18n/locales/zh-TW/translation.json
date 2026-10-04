@@ -59,7 +59,16 @@
   "jobs": {
     "metaTitle": "職缺 · Wild Hunt",
     "heading": "職缺",
-    "empty": "尚未追蹤任何職缺。"
+    "empty": "尚未追蹤任何職缺。",
+    "loadError": "無法載入你的應徵紀錄。",
+    "retry": "重試",
+    "status": {
+      "saved": "已儲存",
+      "applied": "已應徵",
+      "interview": "面試中",
+      "rejected": "未錄取",
+      "offer": "已錄取"
+    }
   },
   "documents": {
     "metaTitle": "文件 · Wild Hunt",
