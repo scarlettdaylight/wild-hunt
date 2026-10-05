@@ -24,7 +24,7 @@ export function ForgotPasswordForm() {
         description={t("auth.forgotPassword.sentDescription")}
       >
         <Link
-          href={buildLocalizedPath(locale, ROUTES.login)}
+          href={buildLocalizedPath(locale, ROUTES.home)}
           className="mt-6 inline-block text-sm text-link underline underline-offset-4 hover:text-link-hover"
         >
           {t("common.backToSignIn")}
@@ -56,7 +56,7 @@ export function ForgotPasswordForm() {
       <p className="mt-6 text-sm text-muted">
         {t("auth.forgotPassword.remembered")}{" "}
         <Link
-          href={buildLocalizedPath(locale, ROUTES.login)}
+          href={buildLocalizedPath(locale, ROUTES.home)}
           className="text-link underline underline-offset-4 hover:text-link-hover"
         >
           {t("auth.signIn.title")}

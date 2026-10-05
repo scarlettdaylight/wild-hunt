@@ -59,7 +59,7 @@ export async function updateSession(request: NextRequest) {
 
   if (!data?.claims && !isPublic(pathname)) {
     const url = request.nextUrl.clone();
-    url.pathname = `/${locale}${ROUTES.login}`;
+    url.pathname = `/${locale}${ROUTES.home}`;
     url.searchParams.set("redirect", pathname);
     return NextResponse.redirect(url);
   }

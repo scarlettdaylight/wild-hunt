@@ -8,7 +8,6 @@
  */
 export const ROUTES = {
   home: "/",
-  login: "/login",
   signUp: "/sign-up",
   checkEmail: "/check-email",
   forgotPassword: "/forgot-password",
@@ -32,7 +31,6 @@ export const ROUTES = {
  */
 export const PUBLIC_ROUTES = [
   ROUTES.home,
-  ROUTES.login,
   ROUTES.signUp,
   ROUTES.checkEmail,
   ROUTES.forgotPassword,

@@ -19,7 +19,7 @@ export default async function CheckEmailPage() {
       description={t("auth.checkEmail.description")}
     >
       <Link
-        href={await getLocalizedPath(ROUTES.login)}
+        href={await getLocalizedPath(ROUTES.home)}
         className="mt-6 inline-block text-sm underline underline-offset-4"
       >
         {t("common.backToSignIn")}

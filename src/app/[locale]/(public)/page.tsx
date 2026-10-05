@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 import { getAuthUser } from "@/lib/auth/getAuthUser";
 import { getLocalizedPath } from "@/lib/getLocalizedPath";
@@ -21,7 +22,9 @@ const Home = async () => {
         </div>
 
         <div className="flex flex-1 items-center justify-center py-8">
-          <SignInPanel />
+          <Suspense>
+            <SignInPanel />
+          </Suspense>
         </div>
       </div>
     </main>

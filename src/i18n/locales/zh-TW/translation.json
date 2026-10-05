@@ -92,7 +92,65 @@
       "title": "建立帳號",
       "signUp": "建立帳號",
       "haveAccount": "已經有帳號了？",
-      "signIn": "登入"
+      "signIn": "登入",
+      "stepLabel": "第 {{current}} 步，共 {{total}} 步",
+      "back": "返回",
+      "step1": {
+        "title": "建立你的帳號",
+        "description": "你的存檔會跨裝置同步。",
+        "continueWithGoogle": "使用 Google 繼續",
+        "continueWithLinkedIn": "使用 LinkedIn 繼續",
+        "divider": "或使用電子郵件註冊",
+        "fullName": "姓名",
+        "fullNamePlaceholder": "王小明",
+        "passwordHint": "至少 8 個字元，包含一個數字。",
+        "emailInvalid": "請輸入有效的電子郵件地址。",
+        "passwordInvalid": "密碼需至少 8 個字元，並包含一個數字。",
+        "continue": "繼續"
+      },
+      "step2": {
+        "title": "聊聊你的工作經歷",
+        "description": "這會用來客製化你的履歷草稿與面試準備。",
+        "yearsOfExperience": "工作年資",
+        "currentRole": "目前或最近的職稱",
+        "currentRolePlaceholder": "資深前端工程師",
+        "field": "領域",
+        "continue": "繼續",
+        "experience": {
+          "0-2": "0-2 年",
+          "3-5": "3-5 年",
+          "6-9": "6-9 年",
+          "10+": "10+ 年"
+        },
+        "fields": {
+          "engineering": "工程",
+          "design": "設計",
+          "product": "產品",
+          "data": "資料",
+          "marketing": "行銷",
+          "other": "其他"
+        }
+      },
+      "step3": {
+        "title": "你在找尋什麼？",
+        "description": "我們會用這個設定你的 EXP 目標與卡牌稀有度。",
+        "whatBringsYouHere": "你來這裡的原因",
+        "weeklyTarget": "每週投遞目標",
+        "weeklyTargetHint": "設定你的連續紀錄目標，之後可在設定中更改。",
+        "submit": "建立帳號並開始",
+        "goals": {
+          "firstRole": "找到我在科技業的第一份工作",
+          "seniorTitle": "晉升更資深的職稱",
+          "switchIndustry": "轉換產業或領域",
+          "stayOrganised": "有條理地管理投遞進度"
+        },
+        "targets": {
+          "2": "2/週",
+          "5": "5/週",
+          "10": "10/週",
+          "15": "15/週"
+        }
+      }
     },
     "checkEmail": {
       "metaTitle": "確認你的電子郵件 · Wild Hunt",

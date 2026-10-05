@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { signIn } from "@/lib/auth/actions";
 import { buildLocalizedPath, ROUTES } from "@/lib/routes";
 import { FormError } from "@/components/form/FormError";
+import { PanelField } from "@/components/form/PanelField";
 import {
   PrimaryButton,
   SecondaryButton,
@@ -15,27 +16,11 @@ import {
 } from "@/components/ui/Button";
 import { GoogleIcon, LinkedInIcon } from "@/components/icons";
 
-const PanelField = ({
-  label,
-  ...props
-}: { label: string } & React.ComponentProps<"input">) => {
-  return (
-    <label className="flex flex-col gap-2">
-      <span className="font-mono text-[11px] font-medium tracking-[0.16em] text-label uppercase">
-        {label}
-      </span>
-      <input
-        className="rounded-xl border border-hairline-card bg-off-white px-3 py-3 text-sm transition-colors outline-none placeholder:text-faint focus:border-primary"
-        {...props}
-      />
-    </label>
-  );
-};
-
 export const SignInPanel = () => {
   const { t } = useTranslation();
   const { locale } = useParams<{ locale: string }>();
   const router = useRouter();
+  const redirectTo = useSearchParams().get("redirect");
   const [state, formAction] = useActionState(signIn, undefined);
 
   return (
@@ -59,6 +44,9 @@ export const SignInPanel = () => {
 
       <form action={formAction} className="mt-6 flex flex-col gap-4">
         <input type="hidden" name="locale" value={locale} />
+        {redirectTo && (
+          <input type="hidden" name="redirect" value={redirectTo} />
+        )}
 
         <PanelField
           label={t("auth.fields.email")}
@@ -103,7 +91,7 @@ export const SignInPanel = () => {
           {t("home.signIn.google")}
         </SecondaryButton>
         <SecondaryButton className="inline-flex flex-1 items-center justify-center gap-2">
-          <LinkedInIcon className="size-5" />
+          <LinkedInIcon className="size-5 text-linkedin" />
           {t("home.signIn.linkedIn")}
         </SecondaryButton>
       </div>

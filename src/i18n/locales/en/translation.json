@@ -92,7 +92,65 @@
       "title": "Create account",
       "signUp": "Create account",
       "haveAccount": "Already have an account?",
-      "signIn": "Sign in"
+      "signIn": "Sign in",
+      "stepLabel": "Step {{current}} of {{total}}",
+      "back": "Back",
+      "step1": {
+        "title": "Create your account",
+        "description": "Your save file syncs across devices.",
+        "continueWithGoogle": "Continue with Google",
+        "continueWithLinkedIn": "Continue with LinkedIn",
+        "divider": "Or sign up with email",
+        "fullName": "Full name",
+        "fullNamePlaceholder": "Jane Doe",
+        "passwordHint": "At least 8 characters, one number.",
+        "emailInvalid": "Enter a valid email address.",
+        "passwordInvalid": "Password needs at least 8 characters and one number.",
+        "continue": "Continue"
+      },
+      "step2": {
+        "title": "A bit about your work",
+        "description": "This tailors your CV drafts and interview prep.",
+        "yearsOfExperience": "Years of experience",
+        "currentRole": "Current or most recent role",
+        "currentRolePlaceholder": "Senior Frontend Engineer",
+        "field": "Field",
+        "continue": "Continue",
+        "experience": {
+          "0-2": "0-2 yrs",
+          "3-5": "3-5 yrs",
+          "6-9": "6-9 yrs",
+          "10+": "10+ yrs"
+        },
+        "fields": {
+          "engineering": "Engineering",
+          "design": "Design",
+          "product": "Product",
+          "data": "Data",
+          "marketing": "Marketing",
+          "other": "Other"
+        }
+      },
+      "step3": {
+        "title": "What are you hunting for?",
+        "description": "We use this to set your EXP goals and card rarity.",
+        "whatBringsYouHere": "What brings you here",
+        "weeklyTarget": "Weekly application target",
+        "weeklyTargetHint": "Sets your streak goal. You can change it in Settings.",
+        "submit": "Create account and start",
+        "goals": {
+          "firstRole": "Land my first role in tech",
+          "seniorTitle": "Move to a more senior title",
+          "switchIndustry": "Switch industry or discipline",
+          "stayOrganised": "Stay organised across applications"
+        },
+        "targets": {
+          "2": "2/wk",
+          "5": "5/wk",
+          "10": "10/wk",
+          "15": "15/wk"
+        }
+      }
     },
     "checkEmail": {
       "metaTitle": "Confirm your email · Wild Hunt",

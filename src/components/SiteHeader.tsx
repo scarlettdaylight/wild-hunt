@@ -30,7 +30,7 @@ export async function SiteHeader({ leading }: { leading?: ReactNode }) {
           {user ? (
             <SignOutButton />
           ) : (
-            <SignInButton href={await getLocalizedPath(ROUTES.login)} />
+            <SignInButton href={await getLocalizedPath(ROUTES.home)} />
           )}
           <LocaleSwitcher />
         </div>
